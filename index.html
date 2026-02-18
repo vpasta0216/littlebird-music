@@ -22,24 +22,15 @@
         }
 
         :root {
-            /* Branding Colors from Guide (Palette A) */
-            --color-primary: #3F3A37;
-            /* Deep Brown - Text & Headings */
-            --color-accent: #E88952;
-            /* Coral Orange - Buttons & Highlights */
-            --color-accent-light: #D8B890;
-            /* Sand Brown - Secondary Accent */
-            --color-bg: #FFFDF8;
-            /* Background - Main */
-            --color-bg-warm: #F7EFE3;
-            /* Cream Beige - Sections & Warm bg */
-            --color-bg-section: #F7EFE3;
-            /* Section Background */
+            --color-primary: #2C2C2C;
+            --color-accent: #B8860B;
+            --color-accent-light: #D4A843;
+            --color-bg: #FEFCF9;
+            --color-bg-warm: #FBF7F0;
+            --color-bg-section: #F5F0E8;
 
-            --color-text: #3F3A37;
-            /* Deep Brown for text */
-            --color-text-light: #6D635F;
-            /* Lighter Brown for secondary text */
+            --color-text: #333333;
+            --color-text-light: #777777;
             --color-white: #FFFFFF;
             --color-border: #E8E0D4;
 
@@ -116,8 +107,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(255, 253, 248, 0.95);
-            /* Matches --color-bg with opacity */
+            background: rgba(254, 252, 249, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid transparent;
             transition: all 0.3s ease;
@@ -125,7 +115,7 @@
 
         .header.scrolled {
             border-bottom-color: var(--color-border);
-            box-shadow: 0 2px 20px rgba(63, 58, 55, 0.04);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
         }
 
         .header .container {
@@ -141,16 +131,13 @@
             gap: 10px;
         }
 
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.1rem;
+        .logo-img {
+            height: 50px;
+            /* Increased height */
+            width: auto;
+            object-fit: contain;
+            /* Ensure full logo is visible */
+            margin-right: 12px;
         }
 
         .logo-text {
@@ -256,8 +243,7 @@
             width: 800px;
             height: 800px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(232, 137, 82, 0.06) 0%, transparent 70%);
-            /* Accent color hint */
+            background: radial-gradient(circle, rgba(184, 134, 11, 0.06) 0%, transparent 70%);
         }
 
         .hero .container {
@@ -336,7 +322,7 @@
         .btn-primary:hover {
             background: var(--color-accent);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(232, 137, 82, 0.25);
+            box-shadow: 0 8px 25px rgba(184, 134, 11, 0.25);
         }
 
         .btn-outline {
@@ -373,8 +359,7 @@
             overflow: hidden;
             background: var(--color-bg-warm);
             position: relative;
-            box-shadow: 0 20px 60px rgba(63, 58, 55, 0.08);
-            /* Dark shadow */
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
         }
 
         .hero-image-placeholder {
@@ -384,9 +369,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(145deg, #FFFDF8, #F7EFE3);
-            color: var(--color-text-light);
-            font-size: 0.9rem;
+            background: linear-gradient(145deg, #F5EDE0, #EDE4D4);
+            color: var(--color-text);
+            /* Darker text for overlay */
+            text-align: center;
+            padding: 40px;
         }
 
         .hero-image-placeholder .piano-icon {
@@ -402,7 +389,7 @@
             background: var(--color-white);
             padding: 24px 30px;
             border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(63, 58, 55, 0.08);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
             display: flex;
             gap: 32px;
         }
@@ -441,7 +428,7 @@
             width: 100%;
             aspect-ratio: 3/4;
             border-radius: 20px;
-            background: linear-gradient(145deg, #FFFDF8, #F7EFE3);
+            background: linear-gradient(145deg, #F5EDE0, #EDE4D4);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -534,8 +521,7 @@
 
         .curriculum-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 16px 48px rgba(63, 58, 55, 0.08);
-            /* Dark shadow */
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
             border-color: var(--color-accent-light);
         }
 
@@ -587,8 +573,7 @@
         /* ===== WARM HANDS / MEMORIES SECTION ===== */
         .section-warm {
             padding: var(--section-padding);
-            background: var(--color-white);
-            /* Changed to White for alternation */
+            background: #F2ECE4;
             text-align: center;
         }
 
@@ -606,7 +591,7 @@
         .polaroid {
             background: white;
             padding: 12px 12px 40px 12px;
-            box-shadow: 0 4px 10px rgba(63, 58, 55, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 250px;
             transform: rotate(-2deg);
             transition: 0.3s;
@@ -630,7 +615,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(63, 58, 55, 0.2);
+            color: rgba(0, 0, 0, 0.2);
             font-size: 2rem;
         }
 
@@ -645,7 +630,7 @@
         /* ===== Instagram Feed Section ===== */
         .insta-feed {
             padding: 80px 0;
-            background: var(--color-bg-warm);
+            background: var(--color-white);
         }
 
         .insta-feed-header {
@@ -678,7 +663,7 @@
         /* ===== SNS Section ===== */
         .sns {
             padding: var(--section-padding);
-            background: var(--color-white);
+            background: var(--color-bg-warm);
         }
 
         .sns-header {
@@ -708,7 +693,7 @@
 
         .sns-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 36px rgba(63, 58, 55, 0.06);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
         }
 
         .sns-card.instagram:hover {
@@ -780,7 +765,7 @@
         /* ===== Location Section ===== */
         .location {
             padding: var(--section-padding);
-            background: var(--color-bg-warm);
+            background: var(--color-bg-section);
         }
 
         .location .container {
@@ -919,8 +904,7 @@
         /* ===== Footer ===== */
         .footer {
             padding: 60px 0 40px;
-            background: #2A2624;
-            /* Darker than primary */
+            background: #1a1a1a;
             color: rgba(255, 255, 255, 0.5);
         }
 
@@ -1065,7 +1049,7 @@
                 background: var(--color-bg);
                 padding: 24px;
                 border-bottom: 1px solid var(--color-border);
-                box-shadow: 0 10px 30px rgba(63, 58, 55, 0.06);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
             }
 
             .hero .container {
@@ -1211,8 +1195,7 @@
     <!--=====Header=====-->
     <header class="header" id="header">
         <div class="container"><a href="#" class="logo">
-                <div class="logo-icon">&#9835;
-                </div>
+                <img src="학원로고/원본로고.jpg" alt="리틀버드 음악학원 로고" class="logo-img">
                 <div>
                     <div class="logo-text">리틀버드 음악학원</div>
                     <div class="logo-sub">Little Bird Music Academy</div>
@@ -1241,9 +1224,13 @@
             <div class="hero-visual">
                 <div class="hero-image-wrapper">
                     <div class="hero-image-placeholder">
-                        <div class="piano-icon">&#127929;
-                        </div><span>학원 대표 사진</span><span style="font-size:0.75rem; margin-top:4px; opacity:0.6;">따뜻하고
-                            깔끔한 분위기 사진</span>
+                        <img src="학원로고/원본로고.jpg" alt="리틀버드 음악학원 로고"
+                            style="width: 180px; height: auto; display: block; margin-bottom: 20px;">
+                        <span
+                            style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">리틀버드
+                            음악학원</span>
+                        <span style="font-size:0.9rem; margin-top:8px; opacity:0.7; letter-spacing: 2px;">LITTLE BIRD
+                            MUSIC ACADEMY</span>
                     </div>
                 </div>
                 <!-- Optional Stats or Highlights -->
@@ -1267,11 +1254,9 @@
     <!--=====About=====-->
     <section class="about" id="about">
         <div class="container">
-            <div class="about-image fade-in">
-                <div class="placeholder-icon">&#128105;
-                    &#8205;
-                    &#127979;
-                </div><span>원장 선생님 사진</span>
+            <div class="about-image fade-in" style="background: none; box-shadow: none;">
+                <img src="새 폴더/KakaoTalk_20260218_154936196.jpg" alt="리틀버드 음악학원 내부 전경"
+                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
             </div>
             <div class="about-content fade-in">
                 <div class="section-label">About Us</div>
@@ -1339,9 +1324,9 @@
                         리듬감,
                         계이름 읽는 법을 익힙니다. </p>
                     <div class="tags" style="display: flex; gap: 8px; flex-wrap: wrap;"><span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">바이엘</span><span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">동요곡집</span><span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">레퍼토리곡</span>
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">바이엘</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">동요곡집</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">레퍼토리곡</span>
                     </div>
                 </div>
                 <!-- 중급반 -->
@@ -1353,10 +1338,10 @@
                         재즈,
                         OST 등 다양한 장르를 연주합니다. </p>
                     <div class="tags" style="display: flex; gap: 8px; flex-wrap: wrap;"><span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">체르니/하농</span><span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">소나티네</span><span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">반주법</span><span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">재즈/OST</span>
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">체르니/하농</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">소나티네</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">반주법</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">재즈/OST</span>
                     </div>
                 </div>
                 <!-- 고급반 -->
@@ -1368,41 +1353,41 @@
                         과정.<br>명곡집과 심화 곡들을 다룹니다. </p>
                     <div class="tags" style="display: flex; gap: 8px; flex-wrap: wrap;">
                         <span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">부르크뮐러</span><span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">명곡집</span><span
-                            style="background:#F7EFE3; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">작품반</span>
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">부르크뮐러</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">명곡집</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">작품반</span>
                     </div>
                 </div>
                 <!-- 재즈 특강 -->
                 <div class="curriculum-card fade-in"
-                    style="flex: 0 1 calc(33.333% - 24px); min-width: 300px; padding: 30px; text-align: left; background: #FFFDF8;">
+                    style="flex: 0 1 calc(33.333% - 24px); min-width: 300px; padding: 30px; text-align: left;">
                     <h3 style="display:flex; justify-content:space-between; align-items:center;">
                         재즈 특강 <span
-                            style="font-size:0.8rem; background:#E88952; color:white; padding:4px 12px; border-radius:12px;">All
+                            style="font-size:0.8rem; background:#B8860B; color:white; padding:4px 12px; border-radius:12px;">All
                             Level</span></h3>
                     <p style="margin: 20px 0; min-height: 60px;">보사노바,
                         스윙,
                         펑키 등 다양한 리듬 익히기.<br>MR 및 드럼 세션과 함께하는 합주 경험. </p>
                     <div class="tags" style="display: flex; gap: 8px; flex-wrap: wrap;">
                         <span
-                            style="background:#EEE; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">재즈플레이스쿨</span><span
-                            style="background:#EEE; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">리듬감</span><span
-                            style="background:#EEE; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">합주</span>
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">재즈플레이스쿨</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">리듬감</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">합주</span>
                     </div>
                 </div>
                 <!-- 수요 특강 -->
                 <div class="curriculum-card fade-in"
-                    style="flex: 0 1 calc(33.333% - 24px); min-width: 300px; padding: 30px; text-align: left; background: #FFFDF8;">
+                    style="flex: 0 1 calc(33.333% - 24px); min-width: 300px; padding: 30px; text-align: left;">
                     <h3 style="display:flex; justify-content:space-between; align-items:center;">
                         수요 특강 <span
-                            style="font-size:0.8rem; background:#E88952; color:white; padding:4px 12px; border-radius:12px;">주
+                            style="font-size:0.8rem; background:#B8860B; color:white; padding:4px 12px; border-radius:12px;">주
                             1회</span></h3>
                     <p style="margin: 20px 0; min-height: 60px;">매주 수요일,
                         피아노 외 다양한 악기 체험.<br>음악의 즐거움을 더해줍니다. </p>
                     <div class="tags" style="display: flex; gap: 8px; flex-wrap: wrap;"><span
-                            style="background:#F7E5C8; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">우크렐레</span><span
-                            style="background:#F7E5C8; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">칼림바</span><span
-                            style="background:#F7E5C8; color:#3F3A37; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">리코더/단소</span>
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">우크렐레</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">칼림바</span><span
+                            style="background:#F5F0E8; color:#333; padding:4px 10px; border-radius:15px; font-size:0.75rem; font-weight:600;">리코더/단소</span>
                     </div>
                 </div>
             </div>
@@ -1609,8 +1594,7 @@
         <div class="container">
             <div class="footer-brand">
                 <div class="logo">
-                    <div class="logo-icon">&#9835;
-                    </div>
+                    <img src="학원로고/원본로고.jpg" alt="리틀버드 음악학원 로고" class="logo-img">
                     <div>
                         <div class="logo-text">리틀버드 음악학원</div>
                         <div class="logo-sub">Little Bird Music Academy</div>
