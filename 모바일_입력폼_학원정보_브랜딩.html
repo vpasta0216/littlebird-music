@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>학원정보/브랜딩 모바일 입력폼</title>
+  <style>
+    :root {
+      --bg: #fffdf8;
+      --paper: #ffffff;
+      --ink: #223246;
+      --muted: #61748a;
+      --line: #ebdfcc;
+      --accent: #e8874f;
+      --accent-soft: #fff2e8;
+      --ok: #2d9c7f;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: radial-gradient(1000px 400px at 0 -10%, #ffe8d5 0%, transparent 55%),
+                  radial-gradient(900px 350px at 100% 0, #e8fff5 0%, transparent 50%),
+                  var(--bg);
+      font-family: "Pretendard", "SUIT", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      line-height: 1.55;
+      padding: 14px;
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: 0 8px 22px rgba(166, 132, 87, 0.12);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 1.22rem;
+      line-height: 1.35;
+    }
+
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .topbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-soft);
+      color: #884018;
+      border: 1px solid #f2cfb7;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: #314458;
+      padding: 9px 12px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: #fff8f0; border-color: #e0bf9b; }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn.primary:hover { filter: brightness(0.95); }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 12px;
+      font-weight: 800;
+      background: #fff9f2;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.95rem;
+    }
+
+    details[open] summary { background: #fff4e7; }
+
+    .section {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #2a3f56;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 11px;
+      font-size: 0.95rem;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 76px;
+      line-height: 1.55;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 2px solid #ffd9bd;
+      border-color: #e8ae82;
+    }
+
+    .checks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      font-size: 0.88rem;
+      color: #334a60;
+    }
+
+    .checks label {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .output-wrap {
+      display: grid;
+      gap: 8px;
+    }
+
+    #resultText {
+      min-height: 250px;
+      font-family: "Consolas", "D2Coding", monospace;
+      background: #fffdf9;
+      font-size: 0.86rem;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin: 0;
+    }
+
+    .note {
+      margin: 1px 0 2px;
+      color: #4a5d73;
+      font-size: 0.8rem;
+      line-height: 1.48;
+      padding: 8px 10px;
+      background: #fff7ec;
+      border: 1px dashed #e9c8a3;
+      border-radius: 9px;
+    }
+
+    .ok {
+      color: var(--ok);
+      font-weight: 700;
+      font-size: 0.83rem;
+      min-height: 1.2em;
+    }
+
+    @media (max-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      h1 { font-size: 1.12rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="card">
+      <h1>학원정보 + 브랜딩 모바일 입력폼</h1>
+      <p class="sub">누나가 아이패드/휴대폰에서 바로 입력 -> 아래 `결과 만들기` -> `복사` -> 카톡으로 보내면 끝.</p>
+      <div class="topbar">
+        <span class="chip">자동 임시저장</span>
+        <span class="chip" id="progressChip">입력 0개</span>
+        <button class="btn" type="button" id="btnClear">입력 초기화</button>
+      </div>
+    </section>
+
+    <details open>
+      <summary>1) 학원 기본 정보</summary>
+      <div class="section">
+        <div class="field">
+          <label>학원 이름</label>
+          <input data-label="학원 이름" type="text" placeholder="예: 도레미피아노학원">
+          <p class="note">작성 팁: 간판에 적힌 학원 이름 그대로 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>학원 주소</label>
+          <input data-label="학원 주소" type="text" placeholder="예: 울산광역시 남구 ... 2층 201호">
+          <p class="note">작성 팁: 네이버 지도에서 검색되는 주소를 적어주세요.</p>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>대표 전화번호</label>
+            <input data-label="대표 전화번호" type="tel" placeholder="예: 052-123-4567">
+            <p class="note">작성 팁: 학부모님이 실제로 연락할 대표번호를 적어주세요.</p>
+          </div>
+          <div class="field">
+            <label>운영 시간 / 휴무일</label>
+            <input data-label="운영 시간 / 휴무일" type="text" placeholder="예: 월~금 14:00~21:00 / 토 10:00~17:00 / 일 휴무">
+            <p class="note">작성 팁: 요일별 운영 시간과 휴무일을 같이 적어주세요.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label>주차 안내</label>
+          <input data-label="주차 안내" type="text" placeholder="예: 상가 지하주차장 2시간 가능">
+          <p class="note">작성 팁: 가능/불가와 위치를 짧게 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>찾아오는 길 설명</label>
+          <textarea data-label="찾아오는 길 설명" placeholder="예: ○○아파트 정문 상가 2층, 엘리베이터 있음"></textarea>
+          <p class="note">작성 팁: 처음 오는 분도 찾기 쉽게 랜드마크 중심으로 적어주세요.</p>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>2) 원장 소개 + 학원 스토리</summary>
+      <div class="section">
+        <div class="grid-2">
+          <div class="field">
+            <label>원장 성함</label>
+            <input data-label="원장 성함" type="text" placeholder="예: 김OO 원장">
+            <p class="note">작성 팁: 홈페이지에 표시할 성함으로 적어주세요.</p>
+          </div>
+          <div class="field">
+            <label>프로필 사진 (있음/없음)</label>
+            <input data-label="프로필 사진 여부" type="text" placeholder="예: 있음 / 없음(촬영 필요)">
+            <p class="note">작성 팁: 없으면 '없음(촬영 필요)'로 적어주세요.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label>학력</label>
+          <textarea data-label="학력" placeholder="예: OO대학교 피아노과 졸업"></textarea>
+          <p class="note">작성 팁: 음악 관련 학력 위주로 적어주세요. 없으면 비워도 됩니다.</p>
+        </div>
+        <div class="field">
+          <label>자격증/수료</label>
+          <textarea data-label="자격증/수료" placeholder="예: 피아노교육지도사, OO교수법 수료"></textarea>
+          <p class="note">작성 팁: 피아노/아동 교육 관련 항목 위주로 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>경력</label>
+          <textarea data-label="경력" placeholder="예: 개인레슨 3년, 학원운영 4년차"></textarea>
+          <p class="note">작성 팁: 숫자(년수/기간)를 넣으면 이해가 쉬워집니다.</p>
+        </div>
+        <div class="field">
+          <label>학원 시작 계기</label>
+          <textarea data-label="학원 시작 계기" placeholder="예: 아이들 가르치는 보람이 커서 시작했어요."></textarea>
+          <p class="note">작성 팁: 말하듯이 2~4문장으로 적어도 충분합니다.</p>
+        </div>
+        <div class="field">
+          <label>기억에 남는 순간</label>
+          <textarea data-label="기억에 남는 순간" placeholder="예: 발표회에서 아이가 자신감 있게 연주한 순간"></textarea>
+          <p class="note">작성 팁: 감동/성장 사례 1개만 적어도 좋습니다.</p>
+        </div>
+        <div class="field">
+          <label>수업에서 가장 중요하게 보는 것</label>
+          <textarea data-label="수업 중요 포인트" placeholder="예: 즐거움 + 기본기"></textarea>
+          <p class="note">작성 팁: 교육 철학이 되는 항목이라 핵심 1~2개만 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>우리 학원만의 특별한 점</label>
+          <textarea data-label="학원 특별한 점" placeholder="예: 소수정원, 맞춤곡 선택, 학부모 소통"></textarea>
+          <p class="note">작성 팁: 다른 학원과 다른 점을 구체적으로 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>학부모님들이 자주 하는 말</label>
+          <textarea data-label="학부모 반응" placeholder="예: 아이가 학원 가는 날을 기다려요"></textarea>
+          <p class="note">작성 팁: 실제 후기 문장을 짧게 적어주세요.</p>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>3) 수업/커리큘럼</summary>
+      <div class="section">
+        <div class="field">
+          <label>대표 수업 1 (이름/대상/시간/주당횟수/교재/수강료)</label>
+          <textarea data-label="대표 수업 1" placeholder="예: 기초반 / 초1~3 / 40분 / 주2회 / 바이엘 / 월 OO만원"></textarea>
+          <p class="note">작성 팁: 위 순서대로 적으면 정리가 가장 쉽습니다.</p>
+        </div>
+        <div class="field">
+          <label>대표 수업 2 (없으면 없음)</label>
+          <textarea data-label="대표 수업 2" placeholder="예: 중급반 / 초4~6 / 50분 / 주2회 ..."></textarea>
+          <p class="note">작성 팁: 없으면 '없음'이라고 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>대표 수업 3 (없으면 없음)</label>
+          <textarea data-label="대표 수업 3" placeholder="예: 성인반 / 60분 / 주1회 ..."></textarea>
+          <p class="note">작성 팁: 없으면 '없음'이라고 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>커리큘럼 단계 정리 (입문->초급->중급->심화)</label>
+          <textarea data-label="커리큘럼 단계" placeholder="예: 입문(자세/음표) -> 초급(양손) -> 중급(표현/템포)"></textarea>
+          <p class="note">작성 팁: 정확하지 않아도 됩니다. 단계별 핵심만 적어주세요.</p>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>4) 시설/자료/SNS</summary>
+      <div class="section">
+        <div class="field">
+          <label>시설 정보 (피아노 대수/브랜드/레슨실/대기실/CCTV)</label>
+          <textarea data-label="시설 정보" placeholder="예: 업라이트 5대, 그랜드 1대, 레슨실 3개"></textarea>
+          <p class="note">작성 팁: 숫자(대수/개수)가 들어가면 신뢰도가 높아집니다.</p>
+        </div>
+        <div class="field">
+          <label>사진 보유 현황 (외관/입구/레슨실/수업장면/원장사진/발표회 등)</label>
+          <textarea data-label="사진 보유 현황" placeholder="예: 외관/레슨실/수업장면 있음, 원장프로필 없음"></textarea>
+          <p class="note">작성 팁: 있는 자료와 없는 자료를 구분해서 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>영상 보유 현황 (개수/저장위치/얼굴노출/동의여부)</label>
+          <textarea data-label="영상 보유 현황" placeholder="예: 연주영상 20개, 휴대폰 보관, 얼굴노출 일부"></textarea>
+          <p class="note">작성 팁: 저장 위치와 동의 여부까지 함께 적어주세요.</p>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>인스타그램</label>
+            <input data-label="인스타그램" type="text" placeholder="예: @doremi_piano">
+            <p class="note">작성 팁: 아이디 또는 링크를 적어주세요.</p>
+          </div>
+          <div class="field">
+            <label>네이버 블로그</label>
+            <input data-label="네이버 블로그" type="text" placeholder="예: https://blog.naver.com/...">
+            <p class="note">작성 팁: 블로그 주소를 적어주세요.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>카카오톡 채널</label>
+            <input data-label="카카오톡 채널" type="text" placeholder="예: @도레미피아노">
+            <p class="note">작성 팁: 채널명 또는 검색 아이디를 적어주세요.</p>
+          </div>
+          <div class="field">
+            <label>유튜브</label>
+            <input data-label="유튜브" type="text" placeholder="예: https://youtube.com/@...">
+            <p class="note">작성 팁: 채널 URL이 있으면 같이 적어주세요.</p>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>5) 브랜딩 핵심 (학원_브랜딩가이드 입력용)</summary>
+      <div class="section">
+        <div class="field">
+          <label>우리는 누구인가?</label>
+          <textarea data-label="브랜딩-우리는 누구" placeholder="예: 초등 입문 맞춤 피아노학원"></textarea>
+          <p class="note">작성 팁: 우리 학원을 한 줄로 정의해주세요.</p>
+        </div>
+        <div class="field">
+          <label>누구를 위한 학원인가?</label>
+          <textarea data-label="브랜딩-타깃" placeholder="예: 초등 1~4학년 학부모"></textarea>
+          <p class="note">작성 팁: 핵심 타깃 1개만 먼저 정해도 충분합니다.</p>
+        </div>
+        <div class="field">
+          <label>무엇이 다른가?</label>
+          <textarea data-label="브랜딩-차별점" placeholder="예: 1:1 맞춤지도, 정기 피드백, 발표회 운영"></textarea>
+          <p class="note">작성 팁: 강점 2~3개를 쉼표로 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>어떤 결과를 약속하는가?</label>
+          <textarea data-label="브랜딩-약속" placeholder="예: 즐겁게 배우면서도 기본기가 단단해집니다"></textarea>
+          <p class="note">작성 팁: 학부모 입장에서 기대할 결과를 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>기억되고 싶은 분위기</label>
+          <textarea data-label="브랜딩-분위기" placeholder="예: 따뜻함, 신뢰감, 밝음"></textarea>
+          <p class="note">작성 팁: 형용사 3개 정도로 적어주세요.</p>
+        </div>
+        <div class="field">
+          <label>핵심 메시지 3개</label>
+          <textarea data-label="브랜딩-핵심 메시지 3개" placeholder="예: 아이 속도 맞춤 / 기초 탄탄 / 소통 중심"></textarea>
+          <p class="note">작성 팁: 홈페이지와 SNS에서 반복할 문구입니다.</p>
+        </div>
+        <div class="field">
+          <label>슬로건 후보 3개</label>
+          <textarea data-label="브랜딩-슬로건 후보 3개" placeholder="예: 아이의 첫 피아노 선생님"></textarea>
+          <p class="note">작성 팁: 짧은 문장 3개를 적어두면 선택이 쉽습니다.</p>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>좋아하는 색상</label>
+            <input data-label="브랜딩-좋아하는 색상" type="text" placeholder="예: 베이지, 코랄">
+            <p class="note">작성 팁: 메인 색 1~2개만 정하세요.</p>
+          </div>
+          <div class="field">
+            <label>피하고 싶은 색상</label>
+            <input data-label="브랜딩-피하고 싶은 색상" type="text" placeholder="예: 형광색, 너무 진한 보라">
+            <p class="note">작성 팁: 학원 이미지와 안 맞는 색을 적어주세요.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label>원하는 분위기(복수 선택)</label>
+          <div class="checks">
+            <label><input type="checkbox" data-group="브랜딩-분위기 선택" value="깔끔 미니멀">깔끔 미니멀</label>
+            <label><input type="checkbox" data-group="브랜딩-분위기 선택" value="따뜻 아기자기">따뜻 아기자기</label>
+            <label><input type="checkbox" data-group="브랜딩-분위기 선택" value="고급 세련">고급 세련</label>
+            <label><input type="checkbox" data-group="브랜딩-분위기 선택" value="밝고 활기참">밝고 활기참</label>
+            <label><input type="checkbox" data-group="브랜딩-분위기 선택" value="귀엽고 친근함">귀엽고 친근함</label>
+          </div>
+          <p class="note">작성 팁: 학원 인테리어 느낌과 맞는 분위기를 1~2개만 고르면 더 깔끔합니다.</p>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>6) 일정/예산/기능</summary>
+      <div class="section">
+        <div class="field">
+          <label>원하는 도메인</label>
+          <input data-label="원하는 도메인" type="text" placeholder="예: doremipiano.com">
+          <p class="note">작성 팁: 미정이면 '미정'으로 적어주세요.</p>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>완성 희망 시기</label>
+            <input data-label="완성 희망 시기" type="text" placeholder="예: 3월 말까지">
+            <p class="note">작성 팁: 정확한 날짜가 아니어도 됩니다.</p>
+          </div>
+          <div class="field">
+            <label>월 유지비 예산</label>
+            <input data-label="월 유지비 예산" type="text" placeholder="예: 월 1~3만원">
+            <p class="note">작성 팁: 범위로 적어도 충분합니다.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label>원하는 홈페이지 기능(복수 선택)</label>
+          <div class="checks">
+            <label><input type="checkbox" data-group="원하는 기능" value="수강 문의 폼">수강 문의 폼</label>
+            <label><input type="checkbox" data-group="원하는 기능" value="오시는 길 지도">오시는 길 지도</label>
+            <label><input type="checkbox" data-group="원하는 기능" value="갤러리">갤러리</label>
+            <label><input type="checkbox" data-group="원하는 기능" value="공지사항">공지사항</label>
+            <label><input type="checkbox" data-group="원하는 기능" value="학부모 후기">학부모 후기</label>
+            <label><input type="checkbox" data-group="원하는 기능" value="FAQ">FAQ</label>
+            <label><input type="checkbox" data-group="원하는 기능" value="수강료 안내">수강료 안내</label>
+            <label><input type="checkbox" data-group="원하는 기능" value="카카오톡 상담 버튼">카카오톡 상담 버튼</label>
+            <label><input type="checkbox" data-group="원하는 기능" value="온라인 상담 예약">온라인 상담 예약</label>
+          </div>
+          <p class="note">작성 팁: 처음에는 3~5개만 선택하세요. 운영 중에 기능을 추가하는 방식이 가장 안정적입니다.</p>
+        </div>
+      </div>
+    </details>
+
+    <section class="card output-wrap">
+      <div class="topbar">
+        <button class="btn primary" type="button" id="btnBuild">결과 텍스트 만들기</button>
+        <button class="btn" type="button" id="btnCopy">결과 복사</button>
+        <button class="btn" type="button" id="btnDownload">TXT 저장</button>
+      </div>
+      <p class="hint">카톡 공유 방법: `결과 텍스트 만들기` -> `결과 복사` -> 카톡 대화창에 붙여넣기</p>
+      <div class="ok" id="statusMsg"></div>
+      <textarea id="resultText" readonly placeholder="여기에 결과가 생성됩니다."></textarea>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = "academy_mobile_form_v1";
+      const inputs = Array.from(document.querySelectorAll("input[data-label], textarea[data-label]"));
+      const checks = Array.from(document.querySelectorAll("input[type='checkbox'][data-group]"));
+
+      const progressChip = document.getElementById("progressChip");
+      const resultText = document.getElementById("resultText");
+      const statusMsg = document.getElementById("statusMsg");
+      const fieldGuides = {
+        "학원 이름": {
+          note: "간판에 적힌 이름 그대로 적어주세요.",
+          placeholder: "예: 도레미피아노학원"
+        },
+        "학원 주소": {
+          note: "네이버 지도에서 검색되는 주소로 적어주세요.",
+          placeholder: "예: 울산광역시 남구 ... 2층 201호"
+        },
+        "대표 전화번호": {
+          note: "학부모님이 실제로 연락할 대표번호를 적어주세요.",
+          placeholder: "예: 052-123-4567"
+        },
+        "운영 시간 / 휴무일": {
+          note: "요일별 운영시간과 휴무일을 함께 적어주세요.",
+          placeholder: "예: 월~금 14:00~21:00 / 토 10:00~17:00 / 일 휴무"
+        },
+        "주차 안내": {
+          note: "가능/불가와 주차 위치를 짧게 적어주세요.",
+          placeholder: "예: 지하주차장 2시간 무료"
+        },
+        "찾아오는 길 설명": {
+          note: "처음 오는 학부모가 바로 찾도록 랜드마크 중심으로 적어주세요.",
+          placeholder: "예: ○○아파트 정문 상가 2층, 엘리베이터 있음"
+        },
+        "원장 성함": {
+          note: "홈페이지에 표기할 이름으로 적어주세요.",
+          placeholder: "예: 김OO 원장"
+        },
+        "프로필 사진 여부": {
+          note: "사진이 없으면 '없음(촬영 필요)'로 적어주세요.",
+          placeholder: "예: 있음"
+        },
+        "학력": {
+          note: "음악 관련 학력 위주로 적어주세요. 없으면 비워도 됩니다.",
+          placeholder: "예: OO대학교 피아노과 졸업"
+        },
+        "자격증/수료": {
+          note: "피아노 교육/아동 교육 관련만 적어주세요.",
+          placeholder: "예: 피아노교육지도사, OO교수법 수료"
+        },
+        "경력": {
+          note: "연차/이전 경력을 숫자 중심으로 적어주세요.",
+          placeholder: "예: 개인레슨 3년, 학원운영 4년차"
+        },
+        "학원 시작 계기": {
+          note: "말하듯이 2~4문장 정도면 충분합니다.",
+          placeholder: "예: 아이들 가르치는 보람이 커서 시작..."
+        },
+        "기억에 남는 순간": {
+          note: "감동/성장 사례 하나만 적어도 좋습니다.",
+          placeholder: "예: 발표회에서 자신감 있게 연주한 순간"
+        },
+        "수업 중요 포인트": {
+          note: "교육 철학이 되는 항목입니다. 핵심 1~2개만 적어주세요.",
+          placeholder: "예: 즐거움 + 기본기"
+        },
+        "학원 특별한 점": {
+          note: "다른 학원과 비교해 차별점만 적어주세요.",
+          placeholder: "예: 소수정원, 맞춤곡 선택, 학부모 소통"
+        },
+        "학부모 반응": {
+          note: "실제 후기 문장을 짧게 넣어주세요.",
+          placeholder: "예: 아이가 학원 가는 날을 기다려요"
+        },
+        "대표 수업 1": {
+          note: "이름/대상/시간/주당횟수/교재/수강료 순서로 적으면 정리가 쉽습니다.",
+          placeholder: "예: 기초반 / 초1~3 / 40분 / 주2회 / 바이엘 / 월 OO만원"
+        },
+        "대표 수업 2": {
+          note: "없으면 '없음'이라고 적어주세요.",
+          placeholder: "예: 중급반 / 초4~6 / 50분 / 주2회 ..."
+        },
+        "대표 수업 3": {
+          note: "없으면 '없음'이라고 적어주세요.",
+          placeholder: "예: 성인반 / 60분 / 주1회 ..."
+        },
+        "커리큘럼 단계": {
+          note: "단계별 핵심만 간단히 적으면 됩니다.",
+          placeholder: "예: 입문(자세/음표) -> 초급(양손) -> 중급(표현/템포)"
+        },
+        "시설 정보": {
+          note: "숫자(대수/개수)를 넣으면 신뢰도가 높아집니다.",
+          placeholder: "예: 업라이트 5대, 그랜드 1대, 레슨실 3개"
+        },
+        "사진 보유 현황": {
+          note: "있는 자료만 적어주세요. 촬영 필요한 것도 함께 표시해도 됩니다.",
+          placeholder: "예: 외관/레슨실/수업장면 있음, 원장프로필 없음"
+        },
+        "영상 보유 현황": {
+          note: "저장위치와 얼굴노출/동의 여부를 같이 적어주세요.",
+          placeholder: "예: 연주영상 20개, 휴대폰 보관, 얼굴노출 일부"
+        },
+        "인스타그램": {
+          note: "아이디 또는 링크를 적어주세요.",
+          placeholder: "예: @doremi_piano"
+        },
+        "네이버 블로그": {
+          note: "블로그 주소를 적어주세요.",
+          placeholder: "예: https://blog.naver.com/..."
+        },
+        "카카오톡 채널": {
+          note: "채널명 또는 검색 아이디를 적어주세요.",
+          placeholder: "예: @도레미피아노"
+        },
+        "유튜브": {
+          note: "채널 URL이 있으면 적어주세요.",
+          placeholder: "예: https://youtube.com/@..."
+        },
+        "브랜딩-우리는 누구": {
+          note: "우리 학원을 한 줄로 정의해주세요.",
+          placeholder: "예: 초등 입문 맞춤 피아노학원"
+        },
+        "브랜딩-타깃": {
+          note: "핵심 고객층 1개만 정해도 충분합니다.",
+          placeholder: "예: 초등 1~4학년 학부모"
+        },
+        "브랜딩-차별점": {
+          note: "강점 2~3개를 쉼표로 적어주세요.",
+          placeholder: "예: 1:1 맞춤지도, 정기 피드백, 발표회 운영"
+        },
+        "브랜딩-약속": {
+          note: "학부모에게 주는 결과 약속을 적어주세요.",
+          placeholder: "예: 즐겁게 배우면서도 기본기가 단단해집니다"
+        },
+        "브랜딩-분위기": {
+          note: "학원 느낌을 형용사 3개 정도로 적어주세요.",
+          placeholder: "예: 따뜻함, 신뢰감, 밝음"
+        },
+        "브랜딩-핵심 메시지 3개": {
+          note: "홈페이지와 SNS에서 반복할 문장 3개를 적어주세요.",
+          placeholder: "예: 아이 속도 맞춤 / 기초 탄탄 / 소통 중심"
+        },
+        "브랜딩-슬로건 후보 3개": {
+          note: "짧은 문장 3개를 적어두면 선택이 쉽습니다.",
+          placeholder: "예: 아이의 첫 피아노 선생님"
+        },
+        "브랜딩-좋아하는 색상": {
+          note: "메인 색 1~2개를 적어주세요.",
+          placeholder: "예: 베이지, 코랄"
+        },
+        "브랜딩-피하고 싶은 색상": {
+          note: "학원 이미지와 맞지 않는 색을 적어주세요.",
+          placeholder: "예: 형광색, 너무 진한 보라"
+        },
+        "원하는 도메인": {
+          note: "없으면 미정으로 두셔도 됩니다.",
+          placeholder: "예: doremipiano.com"
+        },
+        "완성 희망 시기": {
+          note: "대략적인 마감 시점으로 적어주세요.",
+          placeholder: "예: 3월 말까지"
+        },
+        "월 유지비 예산": {
+          note: "범위로 적어도 됩니다.",
+          placeholder: "예: 월 1~3만원"
+        }
+      };
+
+      function normalize(v) {
+        return (v || "").replace(/\r\n?/g, "\n").trim();
+      }
+
+      function applyFieldGuides() {
+        inputs.forEach((el) => {
+          const label = el.dataset.label;
+          const guide = fieldGuides[label];
+          if (!guide) return;
+
+          if (guide.placeholder) {
+            el.placeholder = guide.placeholder;
+          }
+
+          const field = el.closest(".field");
+          if (!field) return;
+          if (field.querySelector(".note")) return;
+          if (field.querySelector(".note[data-for='" + label + "']")) return;
+
+          const note = document.createElement("p");
+          note.className = "note";
+          note.dataset.for = label;
+          note.textContent = "작성 팁: " + guide.note;
+          el.insertAdjacentElement("afterend", note);
+        });
+      }
+
+      function updateProgress() {
+        const valueCount = inputs.filter((el) => normalize(el.value) !== "").length;
+        const checkGroups = {};
+        checks.forEach((ch) => {
+          if (!checkGroups[ch.dataset.group]) checkGroups[ch.dataset.group] = false;
+          if (ch.checked) checkGroups[ch.dataset.group] = true;
+        });
+        const checkedGroupCount = Object.values(checkGroups).filter(Boolean).length;
+        progressChip.textContent = "입력 " + (valueCount + checkedGroupCount) + "개";
+      }
+
+      function saveState() {
+        const data = {
+          values: {},
+          checks: {}
+        };
+
+        inputs.forEach((el, idx) => {
+          data.values["v" + idx] = el.value;
+        });
+
+        checks.forEach((ch, idx) => {
+          data.checks["c" + idx] = ch.checked;
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        updateProgress();
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const data = JSON.parse(raw);
+          if (!data) return;
+
+          inputs.forEach((el, idx) => {
+            const key = "v" + idx;
+            if (data.values && typeof data.values[key] === "string") el.value = data.values[key];
+          });
+
+          checks.forEach((ch, idx) => {
+            const key = "c" + idx;
+            if (data.checks && typeof data.checks[key] === "boolean") ch.checked = data.checks[key];
+          });
+        } catch (_) {
+          // ignore broken storage
+        }
+      }
+
+      function sectionTitleByIndex(idx) {
+        if (idx < 6) return "1) 학원 기본 정보";
+        if (idx < 15) return "2) 원장 소개 + 학원 스토리";
+        if (idx < 19) return "3) 수업/커리큘럼";
+        if (idx < 26) return "4) 시설/자료/SNS";
+        if (idx < 35) return "5) 브랜딩 핵심";
+        return "6) 일정/예산/기능";
+      }
+
+      function collectCheckGroup(name) {
+        const picked = checks
+          .filter((ch) => ch.dataset.group === name && ch.checked)
+          .map((ch) => ch.value);
+        return picked.length ? picked.join(", ") : "";
+      }
+
+      function buildResult() {
+        const lines = [];
+        let currentSection = "";
+
+        inputs.forEach((el, idx) => {
+          const section = sectionTitleByIndex(idx);
+          if (section !== currentSection) {
+            currentSection = section;
+            lines.push("");
+            lines.push("==================================================");
+            lines.push(section);
+            lines.push("==================================================");
+          }
+
+          const label = el.dataset.label || "항목";
+          const value = normalize(el.value) || "(미작성)";
+
+          lines.push(label + ":");
+          lines.push(value);
+          lines.push("");
+        });
+
+        const mood = collectCheckGroup("브랜딩-분위기 선택");
+        const features = collectCheckGroup("원하는 기능");
+
+        lines.push("브랜딩-분위기 선택:");
+        lines.push(mood || "(미선택)");
+        lines.push("");
+
+        lines.push("원하는 기능:");
+        lines.push(features || "(미선택)");
+        lines.push("");
+
+        lines.push("작성일시: " + new Date().toLocaleString("ko-KR"));
+
+        resultText.value = lines.join("\n").replace(/\n{3,}/g, "\n\n");
+        statusMsg.textContent = "결과 텍스트 생성 완료";
+      }
+
+      async function copyResult() {
+        if (!resultText.value.trim()) {
+          buildResult();
+        }
+
+        try {
+          await navigator.clipboard.writeText(resultText.value);
+          statusMsg.textContent = "복사 완료 - 카톡에 붙여넣으세요";
+        } catch (_) {
+          resultText.focus();
+          resultText.select();
+          document.execCommand("copy");
+          statusMsg.textContent = "복사 완료 - 카톡에 붙여넣으세요";
+        }
+      }
+
+      function downloadTxt() {
+        if (!resultText.value.trim()) {
+          buildResult();
+        }
+
+        const blob = new Blob([resultText.value], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "학원정보_브랜딩_응답.txt";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        statusMsg.textContent = "TXT 저장 완료";
+      }
+
+      function clearAll() {
+        if (!confirm("입력한 내용을 모두 지울까요?")) return;
+        inputs.forEach((el) => { el.value = ""; });
+        checks.forEach((ch) => { ch.checked = false; });
+        resultText.value = "";
+        localStorage.removeItem(STORAGE_KEY);
+        updateProgress();
+        statusMsg.textContent = "초기화 완료";
+      }
+
+      inputs.forEach((el) => el.addEventListener("input", saveState));
+      checks.forEach((ch) => ch.addEventListener("change", saveState));
+
+      document.getElementById("btnBuild").addEventListener("click", buildResult);
+      document.getElementById("btnCopy").addEventListener("click", copyResult);
+      document.getElementById("btnDownload").addEventListener("click", downloadTxt);
+      document.getElementById("btnClear").addEventListener("click", clearAll);
+
+      applyFieldGuides();
+      loadState();
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>
