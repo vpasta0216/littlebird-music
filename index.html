@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>리틀버드 음악학원 | 울산</title>
     <meta name="description" content="울산 리틀버드 음악학원 - 아이의 첫 번째 피아노 선생님. 초등학생 맞춤, 즐거운 음악 경험과 탄탄한 기초 교육.">
+    <meta property="og:title" content="리틀버드 음악학원 | 울산">
+    <meta property="og:description" content="기초부터 재즈, 합주, 연주회까지. 아이들의 음악성이 날아오릅니다.">
+    <meta property="og:image" content="images/logo/logo.png">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="theme-color" content="#FEFCF9">
+    <link rel="icon" type="image/png" href="images/logo/logo-small.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -1169,19 +1176,6 @@
             .insta-feed-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .about-features {
-                grid-template-columns: 1fr;
-            }
-
-            .insta-feed-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
 
         .btn-naver {
@@ -1211,7 +1205,7 @@
     <!--=====Header=====-->
     <header class="header" id="header">
         <div class="container"><a href="#" class="logo">
-                <img src="학원로고/신규.png" alt="리틀버드 음악학원 로고" class="logo-img">
+                <img src="images/logo/logo.png" alt="리틀버드 음악학원 로고" class="logo-img">
                 <div>
                     <div class="logo-text">리틀버드 음악학원</div>
                     <div class="logo-sub">Little Bird Music Academy</div>
@@ -1240,7 +1234,7 @@
             <div class="hero-visual">
                 <div class="hero-image-wrapper">
                     <div class="hero-image-placeholder">
-                        <img src="학원로고/신규.png" alt="리틀버드 음악학원 로고"
+                        <img src="images/logo/logo.png" alt="리틀버드 음악학원 로고"
                             style="width: 180px; height: auto; display: block; margin-bottom: 20px;">
                         <span
                             style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">리틀버드
@@ -1256,7 +1250,7 @@
     <section class="about" id="about">
         <div class="container">
             <div class="about-image fade-in" style="background: none; box-shadow: none;">
-                <img src="새 폴더/KakaoTalk_20260218_154936196.jpg" alt="리틀버드 음악학원 내부 전경"
+                <img src="images/photos/academy.jpg" alt="리틀버드 음악학원 내부 전경"
                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
             </div>
             <div class="about-content fade-in">
@@ -1482,56 +1476,37 @@
                         <br>특별한 순간들을 공유해요
                     </p><span class="sns-link">팔로우하기 &rarr;
                     </span>
-                </a><a href="#" class="sns-card blog fade-in">
-                    <div class="sns-icon">&#9998;
-                    </div>
+                </a>
+                <!-- TODO: 블로그/유튜브 준비되면 주석 해제
+                <a href="#" class="sns-card blog fade-in">
+                    <div class="sns-icon">&#9998;</div>
                     <h3>Naver Blog</h3>
-                    <p>학원 소식,
-                        음악 교육 팁,
-                        <br>자세한 이야기를 전해드려요
-                    </p><span class="sns-link">블로그 방문 &rarr;
-                    </span>
-                </a><a href="#" class="sns-card youtube fade-in">
-                    <div class="sns-icon">&#9654;
-                    </div>
+                    <p>학원 소식, 음악 교육 팁,<br>자세한 이야기를 전해드려요</p>
+                    <span class="sns-link">블로그 방문 &rarr;</span>
+                </a>
+                <a href="#" class="sns-card youtube fade-in">
+                    <div class="sns-icon">&#9654;</div>
                     <h3>YouTube</h3>
-                    <p>학생 연주 영상,
-                        발표회 실황,
-                        <br>감동을 다시 한번
-                    </p><span class="sns-link">채널 구독하기 &rarr;
-                    </span>
-                </a></div>
+                    <p>학생 연주 영상, 발표회 실황,<br>감동을 다시 한번</p>
+                    <span class="sns-link">채널 구독하기 &rarr;</span>
+                </a>
+                -->
+                </div>
         </div>
     </section>
     <!--=====Location=====-->
     <section class="location" id="location">
         <div class="container">
-            <div class="location-map fade-in" style="position: relative;">
-                <!-- Link Overlay -->
-                <a href="https://map.naver.com/p/search/울산%20리틀버드%20음악학원" target="_blank"
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer;"
-                    aria-label="네이버 지도에서 보기"></a>
-
-                <!-- Custom Label (Fake Marker) -->
-                <div
-                    style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -100%); z-index: 5; pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
-                    <div
-                        style="background: white; padding: 10px 18px; border-radius: 8px; font-weight: bold; color: #333; font-size: 1rem; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-                        <span style="color:#03C75A; font-weight:800;">N</span> 리틀버드 음악학원
-                    </div>
-                    <div
-                        style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid white; margin: 0 auto;">
-                    </div>
+            <a href="https://map.naver.com/p/search/울산%20리틀버드%20음악학원" target="_blank"
+                class="location-map fade-in"
+                style="position: relative; text-decoration: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;">
+                <div style="font-size: 3rem;">&#128205;</div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="background: #03C75A; color: white; font-weight: 800; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">N</span>
+                    <span style="font-weight: 700; color: #333; font-size: 1.1rem;">리틀버드 음악학원</span>
                 </div>
-
-                <div
-                    style="width: 100%; height: 450px; background: #eee; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                    <iframe width="100%" height="100%" frameborder="0"
-                        style="border:0; width:100%; height:100%; display:block;"
-                        src="https://maps.google.com/maps?q=울산%20세양청구아파트&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
+                <span style="font-size: 0.85rem; color: #777; margin-top: 4px;">네이버 지도에서 보기 &rarr;</span>
+            </a>
             <div class="location-info fade-in">
                 <div class="section-label">Location</div>
                 <h2 class="section-title">오시는 길</h2>
@@ -1595,7 +1570,7 @@
         <div class="container">
             <div class="footer-brand">
                 <div class="logo">
-                    <img src="학원로고/원본로고.jpg" alt="리틀버드 음악학원 로고" class="logo-img">
+                    <img src="images/logo/logo-footer.jpg" alt="리틀버드 음악학원 로고" class="logo-img">
                     <div>
                         <div class="logo-text">리틀버드 음악학원</div>
                         <div class="logo-sub">Little Bird Music Academy</div>
@@ -1613,16 +1588,13 @@
                     상담</a>
             </div>
             <div class="footer-col">
-                <h4>SNS</h4><a href="https://www.instagram.com/littlebird_music_/" target="_blank">Instagram</a><a href="#">Naver
-                    Blog</a><a href="#">YouTube</a>
+                <h4>SNS</h4><a href="https://www.instagram.com/littlebird_music_/" target="_blank">Instagram</a>
             </div>
         </div>
         <div class="container">
             <div class="footer-bottom"><span>&copy;
                     2026 리틀버드 음악학원. All rights reserved.</span>
                 <div class="footer-social"><a href="https://www.instagram.com/littlebird_music_/" target="_blank" aria-label="Instagram">&#128247;
-                    </a><a href="#" aria-label="Blog">&#9998;
-                    </a><a href="#" aria-label="YouTube">&#9654;
                     </a></div>
             </div>
         </div>
