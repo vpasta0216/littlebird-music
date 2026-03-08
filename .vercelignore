@@ -1,0 +1,14 @@
+node_modules
+.env
+.env.*
+.env.local
+scripts
+docs
+CLAUDE.md
+bun.lock
+package.json
+package-lock.json
+학원로고
+새 폴더
+*.md
+!index.html

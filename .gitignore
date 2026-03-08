@@ -9,3 +9,7 @@ Thumbs.db
 /학원로고/
 
 .vercel
+.env
+.env.*
+node_modules/
+.env*.local
