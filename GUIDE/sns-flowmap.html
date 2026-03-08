@@ -135,6 +135,8 @@
   .sticky-nav a[data-channel="kakao"].active { border-color: #E5A100; color: #B8860B; }
   .sticky-nav a[data-channel="scenario"]:hover,
   .sticky-nav a[data-channel="scenario"].active { border-color: var(--accent); color: var(--accent); }
+  .sticky-nav a[data-channel="blog"]:hover,
+  .sticky-nav a[data-channel="blog"].active { border-color: #03C75A; color: #03C75A; }
   .sticky-nav a[data-channel="ai-image"]:hover,
   .sticky-nav a[data-channel="ai-image"].active { border-color: #7C3AED; color: #7C3AED; }
 
@@ -469,6 +471,7 @@
   .channel-section.youtube { background: #FFFFFF; }
   .channel-section.kakao { background: #FFFDF5; }
   .channel-section.scenario { background: #FFFFFF; }
+  .channel-section.blog { background: #F0FFF4; }
   .channel-section.ai-image { background: #F8F7FF; }
 
   /* ─── AI Image Prompt Box ─── */
@@ -516,6 +519,9 @@
 
   .ai-image .step-number { background: #7C3AED; }
   .ai-image .step-connector { background: #DDD6FE; }
+
+  .blog .step-number { background: #03C75A; }
+  .blog .step-connector { background: #BBF7D0; }
 
   /* channel alternating bg handled by explicit classes below */
 
@@ -622,6 +628,7 @@
   .insta .guide-block-emoji { background: #FFF0F6; }
   .youtube .guide-block-emoji { background: #FFF5F5; }
   .kakao .guide-block-emoji { background: #FFFDF0; }
+  .blog .guide-block-emoji { background: #F0FFF4; }
   .ai-image .guide-block-emoji { background: #F5F3FF; }
   .scenario .guide-block-emoji { background: var(--accent-bg); }
 
@@ -1348,6 +1355,10 @@
       <rect x="9" y="9" width="13" height="13" rx="2"/>
       <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
     </symbol>
+    <!-- Naver N logo -->
+    <symbol id="ico-naver" viewBox="0 0 24 24">
+      <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727v12.845z" fill="#03C75A"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -1358,6 +1369,7 @@
     <a href="#insta" data-channel="insta">인스타그램</a>
     <a href="#youtube" data-channel="youtube">유튜브</a>
     <a href="#kakao" data-channel="kakao">카카오채널</a>
+    <a href="#blog" data-channel="blog">네이버 블로그</a>
     <a href="#ai-image" data-channel="ai-image">AI 이미지</a>
     <a href="#scenario" data-channel="scenario">실전 활용</a>
   </div>
@@ -2079,6 +2091,301 @@
         </div>
       </div>
     </div>
+    </div><!-- /news-card-grid -->
+  </div>
+</section>
+
+<!-- ═══════════ Naver Blog Section ═══════════ -->
+<section class="section-full channel-section blog" id="blog">
+  <div class="section-inner">
+    <div class="channel-header fade-in">
+      <span class="channel-icon"><span class="icon icon-channel" style="color:#03C75A"><svg><use href="#ico-naver"/></svg></span></span>
+      <h2>네이버 블로그</h2>
+      <p class="channel-tagline">지역 학부모가 검색할 때, 우리 학원이 가장 먼저 보이게 만들어요</p>
+    </div>
+
+    <!-- News Card Grid for Blog -->
+    <div class="news-card-grid fade-in" style="margin-bottom:28px;">
+      <div class="news-card featured">
+        <div style="width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#F0FFF4,#BBF7D0);display:flex;align-items:center;justify-content:center;">
+          <span class="icon" style="width:4rem;height:4rem;color:#03C75A"><svg><use href="#ico-naver"/></svg></span>
+        </div>
+        <div class="news-card-body">
+          <span class="news-card-label" style="color:#03C75A;">Naver Blog</span>
+          <div class="news-card-title">네이버 검색 1위를 잡는 학원 블로그 운영법</div>
+          <div class="news-card-desc">지역 학부모가 '울산 피아노학원'을 검색할 때, 우리 학원이 가장 먼저 보이게 만들어요.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide Block Grid -->
+    <div class="news-card-grid">
+
+    <!-- Guide Block 1: 왜 네이버 블로그를 해야 할까? -->
+    <div class="guide-block fade-in" id="blog-why">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji"><span class="icon icon-guide-block" style="color:#03C75A"><svg><use href="#ico-target"/></svg></span></span>
+        <span class="guide-block-title">왜 네이버 블로그를 해야 할까?</span>
+        <span class="guide-block-toggle"><span class="icon" style="width:1.5rem;height:1.5rem"><svg><use href="#ico-chevron-down"/></svg></span></span>
+      </div>
+      <div class="guide-block-body">
+        <ul style="list-style:none;padding:0;">
+          <li style="margin-bottom:14px;padding-left:0;display:flex;gap:10px;align-items:flex-start;">
+            <span style="color:#03C75A;font-weight:800;flex-shrink:0;">&#10003;</span>
+            <span><strong>네이버 검색 점유율 1위</strong> — "울산 피아노학원" 검색 시 블로그 글이 상위 노출</span>
+          </li>
+          <li style="margin-bottom:14px;padding-left:0;display:flex;gap:10px;align-items:flex-start;">
+            <span style="color:#03C75A;font-weight:800;flex-shrink:0;">&#10003;</span>
+            <span><strong>콘텐츠 수명이 길어요</strong> — 한 번 올린 글이 수개월~수년간 검색 유입 지속 (인스타보다 훨씬 김)</span>
+          </li>
+          <li style="margin-bottom:14px;padding-left:0;display:flex;gap:10px;align-items:flex-start;">
+            <span style="color:#03C75A;font-weight:800;flex-shrink:0;">&#10003;</span>
+            <span><strong>학부모가 가장 많이 참고하는 채널</strong> — 학원 결정 전 블로그에서 정보 확인</span>
+          </li>
+          <li style="margin-bottom:14px;padding-left:0;display:flex;gap:10px;align-items:flex-start;">
+            <span style="color:#03C75A;font-weight:800;flex-shrink:0;">&#10003;</span>
+            <span><strong>비용 0원</strong> — 소규모 학원에 가장 가성비 높은 마케팅</span>
+          </li>
+          <li style="margin-bottom:0;padding-left:0;display:flex;gap:10px;align-items:flex-start;">
+            <span style="color:#03C75A;font-weight:800;flex-shrink:0;">&#10003;</span>
+            <span><strong>네이버 플레이스 연동</strong> — 지도 검색에서도 블로그가 함께 노출</span>
+          </li>
+        </ul>
+
+        <div class="tip-box">
+          <div class="tip-box-title"><span class="icon icon-tip"><svg><use href="#ico-bulb"/></svg></span> 꿀팁</div>
+          <p>인스타는 '발견'용, 블로그는 '확인'용이에요. 학부모가 인스타에서 학원을 발견하면, 블로그에서 상세 정보를 확인하고 등록을 결정해요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide Block 2: 블로그 메뉴 구성 -->
+    <div class="guide-block fade-in" id="blog-category">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji"><span class="icon icon-guide-block" style="color:#03C75A"><svg><use href="#ico-memo"/></svg></span></span>
+        <span class="guide-block-title">블로그 메뉴 구성 (카테고리 설정)</span>
+        <span class="guide-block-toggle"><span class="icon" style="width:1.5rem;height:1.5rem"><svg><use href="#ico-chevron-down"/></svg></span></span>
+      </div>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>블로그 관리 → 카테고리 관리</strong>
+              <p>네이버 블로그 관리 메뉴에서 카테고리를 만들어요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>필수 카테고리 만들기</strong>
+              <p>"학원 소개", "수업 후기", "발표회/연주회", "교육 정보", "공지사항" 5개를 만들어요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>카테고리 순서 정하기</strong>
+              <p>학부모가 가장 궁금한 "학원 소개"를 맨 위에 배치해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>대표 글 설정</strong>
+              <p>각 카테고리에 가장 잘 쓴 글을 대표 글로 고정해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <strong>프로필/소개글 작성</strong>
+              <p>학원명, 위치, 연락처, 수업 과목을 프로필에 꼭 넣어요.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title"><span class="icon icon-tip"><svg><use href="#ico-bulb"/></svg></span> 꿀팁</div>
+          <p>카테고리가 곧 학원 홈페이지 메뉴에요. 학부모가 블로그에 들어왔을 때 원하는 정보를 바로 찾을 수 있게 정리해두세요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide Block 3: 어떤 글을 쓰면 좋을까? -->
+    <div class="guide-block fade-in" id="blog-content">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji"><span class="icon icon-guide-block" style="color:#03C75A"><svg><use href="#ico-bulb"/></svg></span></span>
+        <span class="guide-block-title">어떤 글을 쓰면 좋을까?</span>
+        <span class="guide-block-toggle"><span class="icon" style="width:1.5rem;height:1.5rem"><svg><use href="#ico-chevron-down"/></svg></span></span>
+      </div>
+      <div class="guide-block-body">
+        <ol style="padding-left:20px;">
+          <li style="margin-bottom:14px;">
+            <strong>수업 후기 / 학생 성장 사례</strong>
+            <p style="color:var(--n-600);margin-top:2px;">가장 효과적! "OO 학생 3개월 만에 체르니 30 완주" 같은 구체적 성과</p>
+          </li>
+          <li style="margin-bottom:14px;">
+            <strong>발표회 / 연주회 후기</strong>
+            <p style="color:var(--n-600);margin-top:2px;">사진 많이 + 학부모 댓글 캡처로 신뢰 극대화</p>
+          </li>
+          <li style="margin-bottom:14px;">
+            <strong>커리큘럼 안내</strong>
+            <p style="color:var(--n-600);margin-top:2px;">"초등 피아노 수업 어떻게 진행되나요?" (신규 학부모 유입)</p>
+          </li>
+          <li style="margin-bottom:14px;">
+            <strong>학원 일상</strong>
+            <p style="color:var(--n-600);margin-top:2px;">레슨 모습, 시설 사진, 선생님 소개</p>
+          </li>
+          <li style="margin-bottom:14px;">
+            <strong>교육 정보 / FAQ</strong>
+            <p style="color:var(--n-600);margin-top:2px;">"피아노 시작 적정 나이" 같은 검색 유입 글</p>
+          </li>
+          <li style="margin-bottom:0;">
+            <strong>원장 이야기</strong>
+            <p style="color:var(--n-600);margin-top:2px;">교육 철학, 운영 에피소드로 차별화</p>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title"><span class="icon icon-tip"><svg><use href="#ico-bulb"/></svg></span> 꿀팁</div>
+          <p>글 1편당 1,500자 + 사진 5~10장이 이상적이에요. 인스타에 올린 사진을 재활용하면 부담이 훨씬 줄어요!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide Block 4: 검색에 잘 걸리는 제목 만들기 (SEO) -->
+    <div class="guide-block fade-in" id="blog-seo">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji"><span class="icon icon-guide-block" style="color:#03C75A"><svg><use href="#ico-target"/></svg></span></span>
+        <span class="guide-block-title">검색에 잘 걸리는 제목 만들기 (SEO)</span>
+        <span class="guide-block-toggle"><span class="icon" style="width:1.5rem;height:1.5rem"><svg><use href="#ico-chevron-down"/></svg></span></span>
+      </div>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>제목 공식: [지역명] + [학원 종류] + [구체적 내용]</strong>
+              <p>예: "울산 남구 피아노학원 — 5살 첫 수업 후기"</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>키워드 찾기</strong>
+              <p>네이버 검색창에 "울산 피아노학원" 입력 → 자동완성 키워드 메모</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>본문 첫 문단에 키워드 넣기</strong>
+              <p>"울산 삼산동 리틀버드음악학원에서 오늘..." 처럼 자연스럽게</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <strong>이미지에도 키워드</strong>
+              <p>사진 올릴 때 ALT 텍스트(대체 텍스트)에 "울산 음악학원" 넣기</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title"><span class="icon icon-tip"><svg><use href="#ico-bulb"/></svg></span> 꿀팁</div>
+          <p>네이버 키워드플래너(searchad.naver.com)에서 검색량을 확인할 수 있어요. '울산 피아노학원'보다 '울산 남구 피아노학원'처럼 구체적일수록 경쟁이 적어 상위 노출 확률이 높아요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide Block 5: 블로그 관리 루틴 -->
+    <div class="guide-block fade-in" id="blog-routine">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji"><span class="icon icon-guide-block" style="color:#03C75A"><svg><use href="#ico-clock"/></svg></span></span>
+        <span class="guide-block-title">블로그 관리 루틴 (1인 원장용)</span>
+        <span class="guide-block-toggle"><span class="icon" style="width:1.5rem;height:1.5rem"><svg><use href="#ico-chevron-down"/></svg></span></span>
+      </div>
+      <div class="guide-block-body">
+        <p style="margin-bottom:16px;">추천 빈도: <strong style="color:#03C75A;">주 2회</strong> (인스타 재활용 1편 + 오리지널 1편)</p>
+
+        <div style="border:1px solid rgba(26,26,46,0.08);border-radius:var(--radius-sm);overflow:hidden;margin-bottom:16px;">
+          <table style="width:100%;border-collapse:collapse;font-size:1rem;">
+            <thead>
+              <tr style="background:#F0FFF4;">
+                <th style="padding:12px 16px;text-align:left;font-weight:700;border-bottom:1px solid rgba(26,26,46,0.08);">요일</th>
+                <th style="padding:12px 16px;text-align:left;font-weight:700;border-bottom:1px solid rgba(26,26,46,0.08);">할 일</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:12px 16px;border-bottom:1px solid rgba(26,26,46,0.05);font-weight:600;">월요일</td>
+                <td style="padding:12px 16px;border-bottom:1px solid rgba(26,26,46,0.05);color:var(--n-600);">인스타에 올린 수업 사진 → 블로그에 키워드 제목 + 1,500자 확장</td>
+              </tr>
+              <tr>
+                <td style="padding:12px 16px;font-weight:600;">목요일</td>
+                <td style="padding:12px 16px;color:var(--n-600);">교육 정보 or 학원 소개 글 (검색 유입용)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="color:var(--n-600);">시간: 글 1편당 30분~1시간 (사진 재활용 시)</p>
+
+        <div class="tip-box">
+          <div class="tip-box-title"><span class="icon icon-tip"><svg><use href="#ico-bulb"/></svg></span> 꿀팁</div>
+          <p>처음부터 주 5회 쓰려고 하지 마세요. 주 2회로 시작해서 꾸준히 쌓아가는 게 핵심이에요. 3개월만 꾸준히 하면 검색 노출이 확 달라져요!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide Block 6: 인스타 → 블로그 재활용 방법 -->
+    <div class="guide-block fade-in" id="blog-reuse">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji"><span class="icon icon-guide-block" style="color:#03C75A"><svg><use href="#ico-link"/></svg></span></span>
+        <span class="guide-block-title">인스타 → 블로그 재활용 방법</span>
+        <span class="guide-block-toggle"><span class="icon" style="width:1.5rem;height:1.5rem"><svg><use href="#ico-chevron-down"/></svg></span></span>
+      </div>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>인스타 사진 재사용</strong>
+              <p>같은 사진을 블로그에도 올리되, 5~10장으로 늘려요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>캡션 → 긴 글로 확장</strong>
+              <p>인스타 짧은 캡션을 1,500자 이상의 블로그 글로 확장해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>키워드 제목 추가</strong>
+              <p>인스타에 없는 지역명+학원명 포함 제목을 작성해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <strong>블로그 링크 → 카카오 공유</strong>
+              <p>완성된 블로그 글 링크를 카카오채널에도 공유해요.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title"><span class="icon icon-tip"><svg><use href="#ico-bulb"/></svg></span> 꿀팁</div>
+          <p>콘텐츠 1개로 인스타 + 블로그 + 카카오 3채널을 커버할 수 있어요. 이게 1인 원장의 현실적인 멀티채널 운영법이에요.</p>
+        </div>
+      </div>
+    </div>
+
     </div><!-- /news-card-grid -->
   </div>
 </section>
