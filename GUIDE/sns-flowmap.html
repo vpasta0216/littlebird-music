@@ -8,137 +8,108 @@
 <title>SNS 운영 가이드 - 리틀버드음악학원</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Channel colors */
-    --c-home: #2563EB;
-    --c-home-bg: #EFF6FF;
-    --c-home-soft: #DBEAFE;
-    --c-insta: #A855F7;
-    --c-insta-bg: #FAF5FF;
-    --c-insta-soft: #F3E8FF;
-    --c-yt: #EF4444;
+    --c-insta: #C13584;
+    --c-insta-bg: #FDF2F8;
+    --c-insta-soft: #FCE7F3;
+    --c-insta-deep: #7C3AED;
+    --c-yt: #FF0000;
     --c-yt-bg: #FEF2F2;
     --c-yt-soft: #FEE2E2;
-    --c-kakao: #F59E0B;
+    --c-kakao: #FEE500;
     --c-kakao-bg: #FFFBEB;
     --c-kakao-soft: #FEF3C7;
+    --c-kakao-text: #3C1E1E;
 
-    /* Neutrals */
-    --n-900: #0F172A;
-    --n-800: #1E293B;
-    --n-700: #334155;
-    --n-600: #475569;
-    --n-500: #64748B;
-    --n-400: #94A3B8;
-    --n-300: #CBD5E1;
-    --n-200: #E2E8F0;
-    --n-100: #F1F5F9;
-    --n-50: #F8FAFC;
+    --n-900: #111827;
+    --n-800: #1F2937;
+    --n-700: #374151;
+    --n-600: #4B5563;
+    --n-500: #6B7280;
+    --n-400: #9CA3AF;
+    --n-300: #D1D5DB;
+    --n-200: #E5E7EB;
+    --n-100: #F3F4F6;
+    --n-50: #F9FAFB;
+    --white: #FFFFFF;
 
-    /* Accent */
-    --accent: #10B981;
+    --accent: #059669;
     --accent-bg: #ECFDF5;
+    --accent-soft: #D1FAE5;
 
-    /* Layout */
-    --max-w: 640px;
-    --pad: 20px;
-    --radius: 16px;
+    --max-w: 720px;
+    --pad: 24px;
+    --radius: 20px;
     --radius-sm: 12px;
 
-    /* Font */
-    --font: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
-    --font-display: 'Bebas Neue', sans-serif;
+    --font: 'Noto Sans KR', sans-serif;
+    --font-serif: 'Gowun Batang', serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
   body {
     font-family: var(--font);
-    background: var(--n-100);
+    font-size: 1.1rem;
+    line-height: 1.8;
     color: var(--n-800);
-    line-height: 1.65;
+    background: var(--white);
     -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
   }
 
-  /* ─── Sticky Channel Nav ─── */
-  .channel-nav {
+  /* ─── Sticky Nav ─── */
+  .sticky-nav {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(255,255,255,0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 0 var(--pad);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    transition: box-shadow 0.3s ease;
+    border-bottom: 1px solid var(--n-200);
+    padding: 0;
   }
-  .channel-nav.scrolled {
-    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
-  }
-  .channel-nav-inner {
+  .sticky-nav-inner {
     max-width: var(--max-w);
     margin: 0 auto;
     display: flex;
-    align-items: stretch;
-    gap: 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
-  .channel-nav-inner::-webkit-scrollbar { display: none; }
-  .nav-item {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    padding: 10px 8px;
-    color: var(--n-400);
+  .sticky-nav-inner::-webkit-scrollbar { display: none; }
+  .sticky-nav a {
+    flex-shrink: 0;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    font-weight: 700;
     text-decoration: none;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    color: var(--n-500);
     border-bottom: 3px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-    cursor: pointer;
+    transition: all 0.2s;
     white-space: nowrap;
-    -webkit-user-select: none;
-    user-select: none;
   }
-  .nav-item:active { opacity: 0.7; }
-  .nav-item .nav-icon { font-size: 1.2rem; line-height: 1; }
-  .nav-item[data-channel="home"] { border-bottom-color: transparent; }
-  .nav-item[data-channel="home"].active,
-  .nav-item[data-channel="home"]:hover { color: var(--c-home); border-bottom-color: var(--c-home); }
-  .nav-item[data-channel="insta"].active,
-  .nav-item[data-channel="insta"]:hover { color: var(--c-insta); border-bottom-color: var(--c-insta); }
-  .nav-item[data-channel="yt"].active,
-  .nav-item[data-channel="yt"]:hover { color: var(--c-yt); border-bottom-color: var(--c-yt); }
-  .nav-item[data-channel="kakao"].active,
-  .nav-item[data-channel="kakao"]:hover { color: var(--c-kakao); border-bottom-color: var(--c-kakao); }
-  .nav-item[data-channel="map"].active,
-  .nav-item[data-channel="map"]:hover { color: var(--accent); border-bottom-color: var(--accent); }
-
-  /* ─── Main container ─── */
-  .wrap {
-    max-width: var(--max-w);
-    margin: 0 auto;
-    padding: 0 var(--pad);
-    padding-bottom: 60px;
+  .sticky-nav a:hover,
+  .sticky-nav a.active {
+    color: var(--n-900);
   }
+  .sticky-nav a[data-channel="flow"] { border-color: var(--accent); color: var(--accent); }
+  .sticky-nav a[data-channel="insta"]:hover,
+  .sticky-nav a[data-channel="insta"].active { border-color: var(--c-insta); color: var(--c-insta); }
+  .sticky-nav a[data-channel="youtube"]:hover,
+  .sticky-nav a[data-channel="youtube"].active { border-color: var(--c-yt); color: var(--c-yt); }
+  .sticky-nav a[data-channel="kakao"]:hover,
+  .sticky-nav a[data-channel="kakao"].active { border-color: #E5A100; color: #B8860B; }
+  .sticky-nav a[data-channel="scenario"]:hover,
+  .sticky-nav a[data-channel="scenario"].active { border-color: var(--accent); color: var(--accent); }
 
-  /* ─── Hero ─── */
+  /* ─── Hero Section ─── */
   .hero {
-    background: var(--n-900);
-    color: white;
-    padding: 48px var(--pad) 40px;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+    color: var(--white);
+    padding: 60px var(--pad) 50px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -146,1305 +117,1358 @@
   .hero::before {
     content: '';
     position: absolute;
-    top: -60%;
-    left: -20%;
-    width: 140%;
-    height: 140%;
-    background: radial-gradient(ellipse at 30% 50%, rgba(168, 85, 247, 0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(239, 68, 68, 0.1) 0%, transparent 60%);
-    pointer-events: none;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 70%, rgba(193,53,132,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(255,0,0,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(254,229,0,0.08) 0%, transparent 50%);
+    animation: heroGlow 8s ease-in-out infinite alternate;
   }
-  .hero-label {
-    display: inline-block;
-    font-family: var(--font-display);
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
-    color: var(--n-400);
-    margin-bottom: 12px;
+  @keyframes heroGlow {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(5deg) scale(1.05); }
+  }
+  .hero-content {
     position: relative;
+    z-index: 1;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
   }
   .hero h1 {
-    font-size: 1.75rem;
-    font-weight: 900;
-    letter-spacing: -0.03em;
+    font-family: var(--font-serif);
+    font-size: 2.6rem;
+    font-weight: 700;
     line-height: 1.3;
-    margin-bottom: 12px;
-    position: relative;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
   }
-  .hero h1 span {
-    display: inline;
-    background: linear-gradient(135deg, #F59E0B, #EF4444, #A855F7, #2563EB);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .hero p {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto;
   }
-  .hero-sub {
-    font-size: 0.95rem;
-    color: var(--n-400);
-    line-height: 1.6;
-    position: relative;
-    max-width: 400px;
+  .hero-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  /* ─── Section Layout ─── */
+  .section {
+    padding: 60px var(--pad);
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+  .section-full {
+    padding: 60px var(--pad);
+  }
+  .section-full .section-inner {
+    max-width: var(--max-w);
     margin: 0 auto;
   }
 
-  /* ─── Sections ─── */
-  .section {
-    margin-top: 32px;
+  /* ─── Flowchart Section ─── */
+  .flow-section {
+    background: var(--n-50);
+    border-top: 4px solid var(--accent);
   }
-  .section-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-    padding: 0 2px;
+  .flow-title {
+    text-align: center;
+    margin-bottom: 40px;
   }
-  .section-num {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    background: var(--n-900);
-    color: white;
-    font-family: var(--font-display);
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    flex-shrink: 0;
-  }
-  .section-title {
-    font-size: 1.15rem;
-    font-weight: 800;
+  .flow-title h2 {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 700;
     color: var(--n-900);
-    letter-spacing: -0.02em;
+    margin-bottom: 8px;
   }
-
-  /* ─── Channel Cards ─── */
-  .channel-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  .flow-title p {
+    color: var(--n-500);
+    font-size: 1.05rem;
   }
-  .ch-card {
-    background: white;
-    border-radius: var(--radius-sm);
-    padding: 18px 16px;
+  .flowchart {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+  }
+  .flow-node {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 2px solid var(--n-200);
     position: relative;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .ch-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
+  .flow-node:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   }
-  .ch-card.home::before { background: var(--c-home); }
-  .ch-card.insta::before { background: var(--c-insta); }
-  .ch-card.yt::before { background: var(--c-yt); }
-  .ch-card.kakao::before { background: var(--c-kakao); }
-  .ch-card:active { transform: scale(0.98); }
-  .ch-card .ch-icon {
-    font-size: 1.5rem;
+  .flow-node-emoji {
+    font-size: 2.5rem;
     margin-bottom: 8px;
     display: block;
   }
-  .ch-card h3 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    margin-bottom: 2px;
+  .flow-node-title {
+    font-size: 1.2rem;
+    font-weight: 800;
     color: var(--n-900);
+    margin-bottom: 4px;
   }
-  .ch-card .ch-role {
-    font-size: 0.78rem;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .ch-card.home .ch-role { color: var(--c-home); }
-  .ch-card.insta .ch-role { color: var(--c-insta); }
-  .ch-card.yt .ch-role { color: var(--c-yt); }
-  .ch-card.kakao .ch-role { color: var(--c-kakao); }
-  .ch-card p {
-    font-size: 0.82rem;
-    color: var(--n-600);
-    line-height: 1.5;
-  }
-  .ch-card .ch-benefit {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid var(--n-200);
-    font-size: 0.78rem;
+  .flow-node-desc {
+    font-size: 0.95rem;
     color: var(--n-500);
-    display: flex;
-    align-items: flex-start;
-    gap: 4px;
   }
-  .ch-card .ch-benefit::before {
-    content: '\2713';
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    color: var(--n-400);
+  }
+  .flow-arrow-line {
+    width: 2px;
+    height: 24px;
+    background: var(--n-300);
+  }
+  .flow-arrow-head {
+    font-size: 1.2rem;
     color: var(--accent);
     font-weight: 700;
-    flex-shrink: 0;
+    line-height: 1;
   }
-
-  /* ─── Flow Map (Visual Connection) ─── */
-  .flow-map {
-    background: white;
-    border-radius: var(--radius);
-    padding: 24px 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    position: relative;
-  }
-  .flow-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  .flow-hub {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: var(--n-900);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    position: relative;
-    z-index: 2;
-  }
-  .flow-hub .hub-icon { font-size: 1.4rem; margin-bottom: 2px; }
-  .flow-spokes {
+  .flow-branch {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 16px;
     width: 100%;
+    max-width: 440px;
   }
-  .flow-spoke {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px;
-    border-radius: var(--radius-sm);
-    border: 2px solid;
-    font-size: 0.82rem;
-    font-weight: 600;
-    position: relative;
+  .flow-branch .flow-node {
+    max-width: none;
+    padding: 20px 16px;
   }
-  .flow-spoke .spoke-icon { font-size: 1.1rem; }
-  .flow-spoke.home { border-color: var(--c-home); background: var(--c-home-bg); color: var(--c-home); }
-  .flow-spoke.insta { border-color: var(--c-insta); background: var(--c-insta-bg); color: var(--c-insta); }
-  .flow-spoke.yt { border-color: var(--c-yt); background: var(--c-yt-bg); color: var(--c-yt); }
-  .flow-spoke.kakao { border-color: var(--c-kakao); background: var(--c-kakao-bg); color: var(--c-kakao); }
-  .flow-spoke .spoke-arrow {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7rem;
-    color: var(--n-400);
-  }
-  .flow-desc {
+  .flow-branch-label {
     text-align: center;
-    font-size: 0.82rem;
-    color: var(--n-500);
-    margin-top: 4px;
-    line-height: 1.5;
-  }
-  .flow-connections {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px dashed var(--n-200);
-  }
-  .flow-conn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.72rem;
-    color: var(--n-500);
-    background: var(--n-50);
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-  .flow-conn .conn-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .flow-conn .conn-dot.home { background: var(--c-home); }
-  .flow-conn .conn-dot.insta { background: var(--c-insta); }
-  .flow-conn .conn-dot.yt { background: var(--c-yt); }
-  .flow-conn .conn-dot.kakao { background: var(--c-kakao); }
-
-  /* ─── Content Flow Cards ─── */
-  .flow-card {
-    background: white;
-    border-radius: var(--radius-sm);
-    padding: 20px;
-    margin-bottom: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  }
-  .flow-card-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-  .flow-badge {
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: white;
-  }
-  .flow-badge.video { background: var(--c-yt); }
-  .flow-badge.photo { background: var(--c-insta); }
-  .flow-badge.event { background: var(--accent); }
-  .flow-card-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--n-900);
-  }
-  .flow-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    position: relative;
-  }
-  .flow-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 10px 0;
-    position: relative;
-  }
-  .flow-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 13px;
-    top: 36px;
-    bottom: 0;
-    width: 2px;
-    background: var(--n-200);
-  }
-  .flow-step-dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-  .flow-step-dot.source { background: var(--n-800); color: white; }
-  .flow-step-content {
-    flex: 1;
-    min-width: 0;
-  }
-  .flow-step-label {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--n-800);
-    margin-bottom: 2px;
-  }
-  .flow-step-outputs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 6px;
-  }
-  .flow-output {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    border: 1.5px solid;
-  }
-  .flow-output.home { color: var(--c-home); border-color: var(--c-home); background: var(--c-home-bg); }
-  .flow-output.insta { color: var(--c-insta); border-color: var(--c-insta); background: var(--c-insta-bg); }
-  .flow-output.yt { color: var(--c-yt); border-color: var(--c-yt); background: var(--c-yt-bg); }
-  .flow-output.kakao { color: var(--c-kakao); border-color: var(--c-kakao); background: var(--c-kakao-bg); }
-  .flow-output.optional {
-    border-style: dashed;
-    opacity: 0.7;
-  }
-  .flow-output.optional::after {
-    content: '(선택)';
-    font-size: 0.65rem;
-    font-weight: 400;
-    margin-left: 2px;
-  }
-  .flow-tip {
-    background: var(--accent-bg);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    padding: 10px 14px;
-    font-size: 0.82rem;
-    color: #065F46;
-    margin-top: 12px;
-    line-height: 1.5;
-  }
-  .flow-tip strong { font-weight: 700; }
-
-  /* ─── Scenario Tabs ─── */
-  .scenario-tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 2px;
-  }
-  .scenario-tabs::-webkit-scrollbar { display: none; }
-  .scenario-tab {
-    flex-shrink: 0;
-    padding: 10px 18px;
-    border-radius: 10px;
     font-size: 0.85rem;
     font-weight: 700;
-    border: 2px solid var(--n-200);
-    background: white;
-    color: var(--n-600);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    -webkit-user-select: none;
-    user-select: none;
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .scenario-tab:active { transform: scale(0.96); }
-  .scenario-tab.active {
-    border-color: var(--n-900);
-    background: var(--n-900);
-    color: white;
-  }
-  .scenario-panel {
-    display: none;
-    animation: fadeSlideUp 0.3s ease;
-  }
-  .scenario-panel.active { display: block; }
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .scenario-card {
-    background: white;
-    border-radius: var(--radius-sm);
-    padding: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  }
-  .scenario-meta {
-    font-size: 0.82rem;
-    color: var(--n-500);
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--n-100);
-  }
-
-  /* ─── Checklist ─── */
-  .checklist {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .check-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--n-100);
-    transition: opacity 0.2s;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-    min-height: 48px;
-  }
-  .check-item:last-child { border-bottom: none; }
-  .check-item.done { opacity: 0.45; }
-  .check-item.done .check-text { text-decoration: line-through; }
-  .check-box {
-    width: 24px;
-    height: 24px;
-    border: 2px solid var(--n-300);
-    border-radius: 6px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s ease;
-    margin-top: 1px;
-    font-size: 0.8rem;
-    color: transparent;
-  }
-  .check-item.done .check-box {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
-  .check-content {
-    flex: 1;
-    min-width: 0;
-  }
-  .check-step {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--n-200);
-    color: var(--n-600);
-    font-size: 0.7rem;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-right: 6px;
-  }
-  .check-text {
-    font-size: 0.88rem;
-    color: var(--n-700);
-    line-height: 1.5;
-  }
-  .tag {
+    color: var(--accent);
+    background: var(--accent-bg);
+    border-radius: 50px;
+    padding: 4px 14px;
     display: inline-block;
-    padding: 1px 7px;
-    border-radius: 4px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    vertical-align: middle;
-    margin: 0 1px;
+    margin: 0 auto;
   }
-  .tag.insta { background: var(--c-insta-soft); color: var(--c-insta); }
-  .tag.yt { background: var(--c-yt-soft); color: var(--c-yt); }
-  .tag.kakao { background: var(--c-kakao-soft); color: var(--c-kakao); }
-  .tag.home { background: var(--c-home-soft); color: var(--c-home); }
 
-  /* ─── How-to Accordions ─── */
-  .howto-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  /* Node colors */
+  .flow-node.node-film { border-color: #93C5FD; background: #F0F7FF; }
+  .flow-node.node-yt { border-color: #FCA5A5; background: var(--c-yt-bg); }
+  .flow-node.node-insta { border-color: #E9A8D2; background: var(--c-insta-bg); }
+  .flow-node.node-kakao { border-color: #FCD34D; background: var(--c-kakao-bg); }
+  .flow-node.node-parents { border-color: var(--accent-soft); background: var(--accent-bg); }
+
+  /* ─── Channel Section ─── */
+  .channel-section {
+    border-top: 5px solid;
   }
-  .howto-item {
-    background: white;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    overflow: hidden;
+  .channel-section.insta { border-color: var(--c-insta); background: var(--white); }
+  .channel-section.youtube { border-color: var(--c-yt); background: var(--white); }
+  .channel-section.kakao { border-color: #E5A100; background: var(--white); }
+  .channel-section.scenario { border-color: var(--accent); background: var(--white); }
+
+  .channel-section:nth-child(even) { background: var(--n-50); }
+
+  .channel-header {
+    text-align: center;
+    margin-bottom: 40px;
   }
-  .howto-trigger {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 18px;
-    width: 100%;
-    border: none;
-    background: none;
-    cursor: pointer;
-    text-align: left;
-    font-family: var(--font);
-    min-height: 56px;
-    -webkit-user-select: none;
-    user-select: none;
-    position: relative;
+  .channel-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 12px;
   }
-  .howto-trigger:active { background: var(--n-50); }
-  .howto-trigger .ht-icon {
-    font-size: 1.3rem;
-    flex-shrink: 0;
-  }
-  .howto-trigger .ht-label {
-    flex: 1;
-    font-size: 0.95rem;
+  .channel-header h2 {
+    font-family: var(--font-serif);
+    font-size: 2.4rem;
     font-weight: 700;
+    margin-bottom: 8px;
     color: var(--n-900);
   }
-  .howto-trigger .ht-arrow {
-    width: 24px;
-    height: 24px;
+  .channel-header .channel-tagline {
+    font-size: 1.1rem;
+    color: var(--n-500);
+    line-height: 1.6;
+  }
+
+  /* ─── Guide Block (Product Feature Block) ─── */
+  .guide-block {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    border: 1px solid var(--n-200);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .channel-section:nth-child(even) .guide-block {
+    background: var(--white);
+  }
+  .guide-block-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: var(--n-400);
-    transition: transform 0.25s ease;
-    flex-shrink: 0;
-    font-size: 0.9rem;
+    gap: 14px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
   }
-  .howto-item.open .howto-trigger .ht-arrow {
+  .guide-block-emoji {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+  }
+  .guide-block-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--n-900);
+    flex: 1;
+  }
+  .guide-block-toggle {
+    font-size: 1.5rem;
+    color: var(--n-400);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .guide-block.open .guide-block-toggle {
     transform: rotate(180deg);
   }
-  .howto-trigger .ht-color {
-    position: absolute;
-    bottom: 0; left: 18px; right: 18px;
-    height: 2px;
-    border-radius: 2px;
-    opacity: 0;
-    transition: opacity 0.2s;
+  .guide-block-body {
+    display: none;
   }
-  .howto-item.open .howto-trigger .ht-color { opacity: 1; }
-  .howto-item.insta .ht-color { background: var(--c-insta); }
-  .howto-item.yt .ht-color { background: var(--c-yt); }
-  .howto-item.kakao .ht-color { background: var(--c-kakao); }
+  .guide-block.open .guide-block-body {
+    display: block;
+  }
 
-  .howto-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-  }
-  .howto-body-inner {
-    padding: 0 18px 18px;
-  }
-  .howto-steps {
+  /* ─── Steps ─── */
+  .steps {
     list-style: none;
-    counter-reset: hs;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+    counter-reset: step;
+    position: relative;
+    padding-left: 0;
   }
-  .howto-steps li {
+  .step-item {
     display: flex;
+    gap: 18px;
+    margin-bottom: 20px;
+    position: relative;
     align-items: flex-start;
-    gap: 10px;
-    padding: 10px 0;
-    font-size: 0.88rem;
-    color: var(--n-700);
-    line-height: 1.55;
-    border-bottom: 1px solid var(--n-100);
   }
-  .howto-steps li:last-child { border-bottom: none; }
-  .howto-steps li::before {
-    counter-increment: hs;
-    content: counter(hs);
+  .step-item:last-child { margin-bottom: 0; }
+  .step-number {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    font-size: 0.75rem;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--white);
+    position: relative;
   }
-  .howto-item.insta .howto-steps li::before { background: var(--c-insta-bg); color: var(--c-insta); }
-  .howto-item.yt .howto-steps li::before { background: var(--c-yt-bg); color: var(--c-yt); }
-  .howto-item.kakao .howto-steps li::before { background: var(--c-kakao-bg); color: var(--c-kakao); }
+  .step-connector {
+    position: absolute;
+    left: 22px;
+    top: 44px;
+    width: 2px;
+    bottom: -20px;
+    background: var(--n-200);
+  }
+  .step-item:last-child .step-connector { display: none; }
 
-  /* ─── Global Tip ─── */
+  /* Step colors per channel */
+  .insta .step-number { background: var(--c-insta); }
+  .insta .step-connector { background: var(--c-insta-soft); }
+  .youtube .step-number { background: var(--c-yt); }
+  .youtube .step-connector { background: var(--c-yt-soft); }
+  .kakao .step-number { background: #D4A800; color: var(--n-900); }
+  .kakao .step-connector { background: var(--c-kakao-soft); }
+  .scenario .step-number { background: var(--accent); }
+  .scenario .step-connector { background: var(--accent-soft); }
+
+  .step-content {
+    flex: 1;
+    padding-top: 8px;
+  }
+  .step-content strong {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--n-900);
+    margin-bottom: 2px;
+  }
+  .step-content p,
+  .step-content span {
+    font-size: 1.05rem;
+    color: var(--n-600);
+    line-height: 1.7;
+  }
+
+  /* ─── Tip Box ─── */
   .tip-box {
     background: var(--accent-bg);
-    border-left: 3px solid var(--accent);
+    border-left: 4px solid var(--accent);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    padding: 14px 16px;
-    font-size: 0.85rem;
-    color: #065F46;
-    line-height: 1.55;
-    margin-top: 16px;
+    padding: 18px 20px;
+    margin-top: 24px;
   }
-  .tip-box strong { font-weight: 700; }
+  .tip-box-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tip-box p {
+    font-size: 1rem;
+    color: var(--n-700);
+    line-height: 1.7;
+  }
+
+  /* ─── Hashtag Box ─── */
+  .hashtag-box {
+    background: var(--c-insta-bg);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    margin-top: 24px;
+  }
+  .hashtag-box-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--c-insta);
+    margin-bottom: 10px;
+  }
+  .hashtag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .hashtag-tag {
+    background: var(--white);
+    border: 1px solid var(--c-insta-soft);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--c-insta);
+  }
+
+  /* ─── Scenario Cards ─── */
+  .scenario-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 24px;
+    border: 1px solid var(--n-200);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .scenario-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .scenario-card-emoji {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+  .scenario-card-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--n-900);
+  }
+  .scenario-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .scenario-flow-step {
+    background: var(--n-100);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--n-700);
+    white-space: nowrap;
+  }
+  .scenario-flow-arrow {
+    font-size: 1.1rem;
+    color: var(--n-400);
+    font-weight: 700;
+  }
 
   /* ─── Footer ─── */
   .footer {
-    text-align: center;
-    padding: 32px var(--pad);
+    background: var(--n-900);
     color: var(--n-400);
-    font-size: 0.78rem;
-    line-height: 1.6;
+    text-align: center;
+    padding: 40px var(--pad);
+    font-size: 0.9rem;
   }
-  .footer-line { margin-bottom: 4px; }
+  .footer strong {
+    color: var(--white);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 8px;
+  }
 
-  /* ─── Scroll Reveal ─── */
-  .reveal {
+  /* ─── Back to Top ─── */
+  .back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--n-800);
+    color: var(--white);
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     opacity: 0;
-    transform: translateY(16px);
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* ─── Animations ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  .reveal.visible {
+  .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
   /* ─── Responsive ─── */
-  @media (max-width: 400px) {
-    :root { --pad: 16px; }
-    .hero h1 { font-size: 1.5rem; }
-    .channel-grid { gap: 8px; }
-    .ch-card { padding: 14px 12px; }
-    .ch-card h3 { font-size: 0.88rem; }
-    .ch-card p { font-size: 0.78rem; }
-    .flow-spoke { padding: 10px; font-size: 0.78rem; }
-  }
-
-  @media (min-width: 768px) {
-    .hero h1 { font-size: 2rem; }
-    .hero { padding: 56px var(--pad) 48px; }
-    .section { margin-top: 40px; }
-    .ch-card { padding: 22px 20px; }
-    .flow-spokes { gap: 16px; }
-  }
-
-  /* ─── Print ─── */
-  @media print {
-    body { background: white; }
-    .channel-nav { display: none; }
-    .hero { background: var(--n-800) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .wrap { max-width: 100%; padding: 0 12px; }
-    .ch-card, .flow-map, .flow-card, .scenario-card, .howto-item {
-      box-shadow: none;
-      border: 1px solid var(--n-200);
-      break-inside: avoid;
+  @media (max-width: 768px) {
+    :root {
+      --pad: 18px;
     }
-    .howto-body { max-height: none !important; }
-    .scenario-panel { display: block !important; margin-bottom: 16px; }
-    .scenario-tabs { display: none; }
-    .reveal { opacity: 1 !important; transform: none !important; }
-    .flow-output, .flow-badge, .tag, .flow-spoke, .check-step, .section-num, .scenario-tab {
+    .hero { padding: 48px var(--pad) 40px; }
+    .hero h1 { font-size: 2rem; }
+    .hero p { font-size: 1.05rem; }
+    .hero-emoji { font-size: 2.8rem; }
+    .channel-icon { font-size: 3rem; }
+    .channel-header h2 { font-size: 2rem; }
+    .flow-title h2 { font-size: 1.8rem; }
+    .guide-block { padding: 24px 20px; }
+    .guide-block-title { font-size: 1.3rem; }
+    .guide-block-emoji { font-size: 1.8rem; }
+    .step-number { width: 40px; height: 40px; font-size: 1rem; }
+    .step-connector { left: 20px; top: 40px; }
+    .flow-branch { grid-template-columns: 1fr; gap: 12px; }
+    .scenario-card { padding: 22px 18px; }
+    .scenario-flow-step { font-size: 0.85rem; padding: 6px 12px; }
+    .sticky-nav a { padding: 12px 14px; font-size: 0.82rem; }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .hero h1 { font-size: 2.4rem; }
+    .section, .section-full .section-inner { max-width: 680px; }
+  }
+
+  /* ─── Print Styles ─── */
+  @media print {
+    .sticky-nav,
+    .back-to-top { display: none !important; }
+    .hero {
+      background: #1E293B !important;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
-    .section { break-inside: avoid; }
-    .check-item { cursor: default; }
-    .footer { page-break-before: avoid; }
+    .guide-block-body { display: block !important; }
+    .guide-block-toggle { display: none !important; }
+    .section-full, .section { padding: 30px 20px; }
+    body { font-size: 11pt; }
+    .flow-node, .guide-block, .scenario-card {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .channel-section {
+      break-before: page;
+      page-break-before: always;
+    }
+    .tip-box, .hashtag-box {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
   }
 </style>
 </head>
 <body>
 
-<!-- ════════ Sticky Channel Nav ════════ -->
-<nav class="channel-nav" id="channelNav" role="navigation" aria-label="채널 바로가기">
-  <div class="channel-nav-inner">
-    <a class="nav-item" data-channel="home" href="#sec-channels" aria-label="홈페이지">
-      <span class="nav-icon">🌐</span>홈페이지
-    </a>
-    <a class="nav-item" data-channel="insta" href="#sec-channels" aria-label="인스타그램">
-      <span class="nav-icon">📸</span>인스타
-    </a>
-    <a class="nav-item" data-channel="yt" href="#sec-channels" aria-label="유튜브">
-      <span class="nav-icon">🎬</span>유튜브
-    </a>
-    <a class="nav-item" data-channel="kakao" href="#sec-channels" aria-label="카카오채널">
-      <span class="nav-icon">💬</span>카카오
-    </a>
-    <a class="nav-item" data-channel="map" href="#sec-flowmap" aria-label="연결지도">
-      <span class="nav-icon">🗺</span>연결 지도
-    </a>
+<!-- ═══════════ Sticky Navigation ═══════════ -->
+<nav class="sticky-nav" id="stickyNav">
+  <div class="sticky-nav-inner">
+    <a href="#flow" data-channel="flow">채널 연결</a>
+    <a href="#insta" data-channel="insta">인스타그램</a>
+    <a href="#youtube" data-channel="youtube">유튜브</a>
+    <a href="#kakao" data-channel="kakao">카카오채널</a>
+    <a href="#scenario" data-channel="scenario">실전 활용</a>
   </div>
 </nav>
 
-<!-- ════════ Hero ════════ -->
-<header class="hero">
-  <div class="hero-label">LITTLEBIRD MUSIC ACADEMY</div>
-  <h1>매일 쓰는<br><span>SNS 운영 가이드</span></h1>
-  <p class="hero-sub">촬영부터 업로드까지, 채널별 3단계로 끝내는 콘텐츠 배포 지도</p>
+<!-- ═══════════ Hero ═══════════ -->
+<header class="hero" id="top">
+  <div class="hero-content">
+    <span class="hero-emoji">🎹</span>
+    <span class="hero-badge">리틀버드음악학원 공식 가이드</span>
+    <h1>SNS 운영 가이드</h1>
+    <p>SNS가 처음이어도 괜찮아요.<br>이 가이드만 따라하면 누구든 할 수 있어요!</p>
+  </div>
 </header>
 
-<div class="wrap">
-
-  <!-- ════════ 1. Channel Roles ════════ -->
-  <div class="section reveal" id="sec-channels">
-    <div class="section-head">
-      <span class="section-num">1</span>
-      <h2 class="section-title">채널별 역할</h2>
+<!-- ═══════════ Flow Section ═══════════ -->
+<section class="section-full flow-section" id="flow">
+  <div class="section-inner">
+    <div class="flow-title fade-in">
+      <h2>전체 채널 연결 흐름</h2>
+      <p>영상 하나로 모든 채널에 올리는 순서예요</p>
     </div>
-    <div class="channel-grid">
-      <div class="ch-card home">
-        <span class="ch-icon">🌐</span>
-        <h3>홈페이지</h3>
-        <div class="ch-role">"학원의 얼굴"</div>
-        <p>커리큘럼, 강사 소개, 위치 안내</p>
-        <div class="ch-benefit">검색으로 처음 찾아오는 학부모가 가장 먼저 보는 곳</div>
+
+    <div class="flowchart">
+      <!-- Step 1: Film -->
+      <div class="flow-node node-film fade-in">
+        <span class="flow-node-emoji">📱</span>
+        <div class="flow-node-title">영상 촬영</div>
+        <div class="flow-node-desc">휴대폰으로 세로 영상 촬영 (15~60초)</div>
       </div>
-      <div class="ch-card insta">
-        <span class="ch-icon">📸</span>
-        <h3>인스타그램</h3>
-        <div class="ch-role">"일상 공유 창구"</div>
-        <p>수업 사진/영상, 릴스, 이벤트 포스터</p>
-        <div class="ch-benefit">비팔로워에게도 노출 - 새 학부모 유입</div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-line"></div>
+        <div class="flow-arrow-head">▼</div>
       </div>
-      <div class="ch-card yt">
-        <span class="ch-icon">🎬</span>
-        <h3>유튜브</h3>
-        <div class="ch-role">"영상 저장소"</div>
-        <p>발표회 풀영상, 학생 연주, 쇼츠</p>
-        <div class="ch-benefit">긴 영상 보관 + 쇼츠로 노출 확대</div>
+
+      <!-- Step 2: YouTube -->
+      <div class="flow-node node-yt fade-in">
+        <span class="flow-node-emoji">▶️</span>
+        <div class="flow-node-title">유튜브 업로드</div>
+        <div class="flow-node-desc">유튜브에 동영상 또는 쇼츠로 업로드</div>
       </div>
-      <div class="ch-card kakao">
-        <span class="ch-icon">💬</span>
-        <h3>카카오채널</h3>
-        <div class="ch-role">"학부모 알림"</div>
-        <p>공지 알림, 이벤트 안내, 1:1 상담</p>
-        <div class="ch-benefit">수업 중에도 자동응답으로 문의 대응</div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-line"></div>
+        <div class="flow-arrow-head">▼</div>
       </div>
+
+      <!-- Branch -->
+      <span class="flow-branch-label">동시에 공유하기</span>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-line" style="height:12px"></div>
+      </div>
+
+      <div class="flow-branch">
+        <div class="flow-node node-insta fade-in">
+          <span class="flow-node-emoji">📸</span>
+          <div class="flow-node-title">인스타 릴스</div>
+          <div class="flow-node-desc">같은 영상을 릴스로 올리기</div>
+        </div>
+        <div class="flow-node node-kakao fade-in">
+          <span class="flow-node-emoji">💬</span>
+          <div class="flow-node-title">카카오 공유</div>
+          <div class="flow-node-desc">포스트 작성 + 학부모 알림</div>
+        </div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-line"></div>
+        <div class="flow-arrow-head">▼</div>
+      </div>
+
+      <!-- Result -->
+      <div class="flow-node node-parents fade-in">
+        <span class="flow-node-emoji">👨‍👩‍👧‍👦</span>
+        <div class="flow-node-title">학부모에게 전달 완료!</div>
+        <div class="flow-node-desc">영상 하나로 3곳에 노출되어 효과 극대화</div>
+      </div>
+    </div>
+
+    <div class="tip-box fade-in" style="margin-top: 32px;">
+      <div class="tip-box-title">💡 꿀팁</div>
+      <p>영상 하나를 촬영하면 유튜브 + 인스타 + 카카오 세 곳에 동시에 올릴 수 있어요. 같은 영상이어도 각 플랫폼에서 새로운 사람들에게 보여지기 때문에 효과가 3배!</p>
     </div>
   </div>
+</section>
 
-  <!-- ════════ 2. Connection Map ════════ -->
-  <div class="section reveal" id="sec-flowmap">
-    <div class="section-head">
-      <span class="section-num">2</span>
-      <h2 class="section-title">채널 연결 지도</h2>
-    </div>
-    <div class="flow-map">
-      <div class="flow-center">
-        <div class="flow-hub">
-          <span class="hub-icon">🎵</span>
-          <span>콘텐츠</span>
-        </div>
-        <div class="flow-spokes">
-          <div class="flow-spoke home">
-            <span class="spoke-icon">🌐</span>
-            <span>홈페이지<br><small style="font-weight:400;font-size:0.72rem">검색 유입</small></span>
-          </div>
-          <div class="flow-spoke insta">
-            <span class="spoke-icon">📸</span>
-            <span>인스타그램<br><small style="font-weight:400;font-size:0.72rem">노출 확대</small></span>
-          </div>
-          <div class="flow-spoke yt">
-            <span class="spoke-icon">🎬</span>
-            <span>유튜브<br><small style="font-weight:400;font-size:0.72rem">영상 보관</small></span>
-          </div>
-          <div class="flow-spoke kakao">
-            <span class="spoke-icon">💬</span>
-            <span>카카오채널<br><small style="font-weight:400;font-size:0.72rem">직접 알림</small></span>
-          </div>
-        </div>
-      </div>
-      <p class="flow-desc">하나의 콘텐츠를 만들어 여러 채널에 배포하면 효과가 배로!</p>
-      <div class="flow-connections">
-        <span class="flow-conn"><span class="conn-dot yt"></span>유튜브 영상 <span style="margin:0 2px">→</span> <span class="conn-dot insta"></span>릴스로 재활용</span>
-        <span class="flow-conn"><span class="conn-dot insta"></span>인스타 포스터 <span style="margin:0 2px">→</span> <span class="conn-dot kakao"></span>카카오 소식</span>
-        <span class="flow-conn"><span class="conn-dot yt"></span>유튜브 링크 <span style="margin:0 2px">→</span> <span class="conn-dot kakao"></span>카카오 알림</span>
-        <span class="flow-conn"><span class="conn-dot insta"></span>인스타 사진 <span style="margin:0 2px">→</span> <span class="conn-dot home"></span>홈페이지 갤러리</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════ 3. Content Flow ════════ -->
-  <div class="section reveal" id="sec-flow">
-    <div class="section-head">
-      <span class="section-num">3</span>
-      <h2 class="section-title">콘텐츠 흐름</h2>
+<!-- ═══════════ Instagram Section ═══════════ -->
+<section class="section-full channel-section insta" id="insta">
+  <div class="section-inner">
+    <div class="channel-header fade-in">
+      <span class="channel-icon">📸</span>
+      <h2>인스타그램</h2>
+      <p class="channel-tagline">학원의 일상과 분위기를 사진/영상으로 보여주는 최고의 채널</p>
     </div>
 
-    <!-- Flow 1: Video -->
-    <div class="flow-card">
-      <div class="flow-card-head">
-        <span class="flow-badge video">영상</span>
-        <span class="flow-card-title">영상 콘텐츠</span>
+    <!-- Reels Guide -->
+    <div class="guide-block fade-in" id="insta-reels">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji">🎬</span>
+        <span class="guide-block-title">릴스 만드는 법</span>
+        <span class="guide-block-toggle">▼</span>
       </div>
-      <div class="flow-steps">
-        <div class="flow-step">
-          <span class="flow-step-dot source">1</span>
-          <div class="flow-step-content">
-            <div class="flow-step-label">세로로 영상 촬영</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-step-dot source">2</span>
-          <div class="flow-step-content">
-            <div class="flow-step-label">CapCut에서 편집</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-step-dot source">3</span>
-          <div class="flow-step-content">
-            <div class="flow-step-label">채널에 배포</div>
-            <div class="flow-step-outputs">
-              <span class="flow-output yt">🎬 유튜브 (긴 영상)</span>
-              <span class="flow-output insta">📸 인스타 릴스</span>
-              <span class="flow-output yt">🎬 유튜브 쇼츠</span>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>세로 영상 촬영하기</strong>
+              <p>휴대폰을 세로로 들고 15초~60초 영상을 촬영해요. 수업 중 아이가 연주하는 장면이 가장 좋아요!</p>
             </div>
-          </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>인스타그램 앱 열기</strong>
+              <p>인스타그램 앱을 열어주세요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>하단 + 버튼 누르기</strong>
+              <p>화면 맨 아래 가운데에 있는 <strong>+ 버튼</strong>을 눌러요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>"릴스" 선택하기</strong>
+              <p>하단에 나오는 메뉴에서 <strong>릴스</strong>를 선택해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">5<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>갤러리에서 영상 선택</strong>
+              <p>왼쪽 아래 갤러리 아이콘을 눌러서 아까 촬영한 영상을 선택해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">6<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>음악 추가 (선택사항)</strong>
+              <p>상단의 음표 아이콘을 눌러 배경 음악을 넣을 수 있어요. 안 넣어도 괜찮아요!</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">7<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>텍스트/스티커 추가</strong>
+              <p>"리틀버드음악학원" 이름이나 귀여운 스티커를 넣으면 더 예뻐요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">8<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>캡션 작성 + 해시태그</strong>
+              <p>영상 설명을 간단히 적고, 해시태그를 붙여주세요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">9</div>
+            <div class="step-content">
+              <strong>공유 버튼 누르기</strong>
+              <p>"공유" 또는 화살표 버튼을 누르면 업로드 완료!</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 꿀팁</div>
+          <p>릴스는 팔로워가 아닌 사람에게도 추천되기 때문에 새 학부모를 만나는 가장 좋은 방법이에요. 짧고 귀여운 영상일수록 조회수가 높아요!</p>
         </div>
-      </div>
-      <div class="flow-tip">
-        <strong>핵심:</strong> 세로로 촬영하면 릴스 + 쇼츠에 동시 활용! 한 번 만들면 두 곳에 올려요.
       </div>
     </div>
 
-    <!-- Flow 2: Photo/Poster -->
-    <div class="flow-card">
-      <div class="flow-card-head">
-        <span class="flow-badge photo">사진</span>
-        <span class="flow-card-title">사진 / 포스터</span>
+    <!-- Feed Guide -->
+    <div class="guide-block fade-in" id="insta-feed">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji">🖼️</span>
+        <span class="guide-block-title">피드 게시물 올리기</span>
+        <span class="guide-block-toggle">▼</span>
       </div>
-      <div class="flow-steps">
-        <div class="flow-step">
-          <span class="flow-step-dot source">1</span>
-          <div class="flow-step-content">
-            <div class="flow-step-label">Canva에서 포스터 제작</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-step-dot source">2</span>
-          <div class="flow-step-content">
-            <div class="flow-step-label">채널에 배포</div>
-            <div class="flow-step-outputs">
-              <span class="flow-output insta">📸 인스타 피드</span>
-              <span class="flow-output kakao">💬 카카오 알림 발송</span>
-              <span class="flow-output home optional">🌐 홈페이지 업데이트</span>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>하단 + 버튼 누르기</strong>
+              <p>화면 맨 아래 가운데의 <strong>+ 버튼</strong>을 눌러요.</p>
             </div>
-          </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>"게시물" 선택하기</strong>
+              <p>하단 메뉴에서 <strong>게시물</strong>을 선택해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>사진 선택 (최대 10장)</strong>
+              <p>갤러리에서 올리고 싶은 사진을 골라요. 여러 장 선택하면 슬라이드 형태로 올라가요!</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>필터/편집하기</strong>
+              <p>사진이 어두우면 밝기를 올리고, 필터를 적용해보세요. 자연스러운 게 좋아요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">5<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>캡션 작성하기</strong>
+              <p>사진 설명과 함께 해시태그를 넣어주세요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">6</div>
+            <div class="step-content">
+              <strong>공유 버튼 누르기</strong>
+              <p>"공유"를 누르면 피드에 게시물이 올라가요!</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 꿀팁</div>
+          <p>피드 사진은 정사각형(1:1)으로 잘리니까, 중요한 부분이 가운데에 오도록 찍어주세요. 첫 번째 사진이 제일 예쁜 걸로!</p>
         </div>
       </div>
     </div>
 
-    <!-- Flow 3: Event -->
-    <div class="flow-card">
-      <div class="flow-card-head">
-        <span class="flow-badge event">이벤트</span>
-        <span class="flow-card-title">이벤트 (신학기 / 방학 / 발표회)</span>
+    <!-- Story Guide -->
+    <div class="guide-block fade-in" id="insta-story">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji">⏰</span>
+        <span class="guide-block-title">스토리 올리기</span>
+        <span class="guide-block-toggle">▼</span>
       </div>
-      <div class="flow-steps">
-        <div class="flow-step">
-          <span class="flow-step-dot source">1</span>
-          <div class="flow-step-content">
-            <div class="flow-step-label">이벤트 기획</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-step-dot source">2</span>
-          <div class="flow-step-content">
-            <div class="flow-step-label">포스터 제작 후 배포</div>
-            <div class="flow-step-outputs">
-              <span class="flow-output insta">📸 인스타 게시</span>
-              <span class="flow-output kakao">💬 카카오 알림</span>
-              <span class="flow-output home">🌐 홈페이지 배너</span>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>프로필 사진의 + 클릭</strong>
+              <p>홈 화면 왼쪽 상단에서 내 프로필 사진 옆의 <strong>+</strong> 를 눌러요.</p>
             </div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="flow-step-dot source">3</span>
-          <div class="flow-step-content">
-            <div class="flow-step-label">영상 촬영 후 배포 (발표회)</div>
-            <div class="flow-step-outputs">
-              <span class="flow-output yt">🎬 유튜브 풀영상</span>
-              <span class="flow-output insta">📸 인스타 릴스</span>
-              <span class="flow-output yt">🎬 유튜브 쇼츠</span>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>사진/영상 선택하기</strong>
+              <p>갤러리에서 올리고 싶은 사진이나 영상을 골라요.</p>
             </div>
-          </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>텍스트/스티커 추가</strong>
+              <p>위쪽 아이콘들을 눌러서 글씨나 스티커를 넣을 수 있어요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <strong>공유하기</strong>
+              <p>"내 스토리" 버튼을 누르면 완료! 24시간 후 자동으로 사라져요.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 꿀팁</div>
+          <p>스토리는 24시간 후 사라지니까 부담 없이 올려보세요! "오늘의 수업 모습" 같은 가벼운 일상을 올리기 좋아요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hashtags -->
+    <div class="hashtag-box fade-in">
+      <div class="hashtag-box-title"># 추천 해시태그 (복사해서 사용하세요!)</div>
+      <div class="hashtag-list">
+        <span class="hashtag-tag">#울산피아노학원</span>
+        <span class="hashtag-tag">#울산음악학원</span>
+        <span class="hashtag-tag">#리틀버드음악학원</span>
+        <span class="hashtag-tag">#어린이피아노</span>
+        <span class="hashtag-tag">#피아노레슨</span>
+        <span class="hashtag-tag">#울산맘</span>
+        <span class="hashtag-tag">#울산학원</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ YouTube Section ═══════════ -->
+<section class="section-full channel-section youtube" id="youtube">
+  <div class="section-inner">
+    <div class="channel-header fade-in">
+      <span class="channel-icon">▶️</span>
+      <h2>유튜브</h2>
+      <p class="channel-tagline">연주회, 발표회 영상을 올려서 오래오래 보관하고 공유해요</p>
+    </div>
+
+    <!-- Video Upload -->
+    <div class="guide-block fade-in" id="yt-upload">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji">📤</span>
+        <span class="guide-block-title">동영상 업로드하기</span>
+        <span class="guide-block-toggle">▼</span>
+      </div>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>YouTube 앱 또는 사이트 열기</strong>
+              <p>YouTube 앱을 열거나 youtube.com에 접속해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>상단 + 버튼 또는 "만들기" 누르기</strong>
+              <p>화면 상단 또는 하단의 <strong>+ 버튼</strong>을 찾아 눌러요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>"동영상 업로드" 선택</strong>
+              <p>메뉴에서 <strong>동영상 업로드</strong>를 선택해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>파일 선택하기</strong>
+              <p>갤러리에서 올리고 싶은 동영상 파일을 선택해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">5<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>제목 작성하기</strong>
+              <p>예시: "리틀버드 음악학원 | 연주회 모습 🎹"<br>학원 이름을 꼭 넣어주세요!</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">6<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>설명란 작성하기</strong>
+              <p>학원 소개 + 연락처 + 해시태그를 넣어요.<br>예시: "울산 리틀버드음악학원 연주회 영상입니다. 📞 052-XXX-XXXX"</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">7<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>썸네일 선택하기</strong>
+              <p>영상 중 가장 예쁜 장면을 썸네일로 선택하거나, 직접 만든 이미지를 업로드해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">8<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>"아동용" 설정 확인</strong>
+              <p>어린이가 나오는 영상이면 <strong>"예, 아동용입니다"</strong>를 선택해요. 법적으로 중요해요!</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">9<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>공개 설정하기</strong>
+              <p><strong>"공개"</strong>를 선택하면 누구나 볼 수 있어요. 학부모만 보게 하려면 "일부 공개"를 선택해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">10</div>
+            <div class="step-content">
+              <strong>게시 버튼 누르기</strong>
+              <p>"게시" 또는 "업로드"를 누르면 완료! 처리 시간이 좀 걸릴 수 있어요.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 꿀팁</div>
+          <p>제목에 "울산 피아노학원", "어린이 피아노" 같은 키워드를 넣으면 검색에 잘 나와요. 썸네일은 밝고 선명한 사진이 클릭률이 높아요!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shorts -->
+    <div class="guide-block fade-in" id="yt-shorts">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji">⚡</span>
+        <span class="guide-block-title">쇼츠 만드는 법</span>
+        <span class="guide-block-toggle">▼</span>
+      </div>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>60초 이하 세로 영상 준비</strong>
+              <p>쇼츠는 60초 이하, 세로(9:16) 영상이어야 해요. 인스타 릴스용 영상 그대로 쓸 수 있어요!</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>YouTube에서 + 버튼 누르기</strong>
+              <p>유튜브 앱에서 하단 <strong>+ 버튼</strong>을 눌러요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>"쇼츠 만들기" 선택</strong>
+              <p>메뉴에서 <strong>쇼츠 만들기</strong>를 선택해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>갤러리에서 영상 선택</strong>
+              <p>왼쪽 아래 갤러리 아이콘을 눌러 영상을 선택해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">5<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>텍스트/음악 추가</strong>
+              <p>원하면 텍스트나 배경 음악을 넣을 수 있어요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">6<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>제목 작성하기</strong>
+              <p>짧고 눈에 띄는 제목을 적어요. 예: "피아노 초보 3개월 성장기 🎹"</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">7</div>
+            <div class="step-content">
+              <strong>업로드하기</strong>
+              <p>업로드 버튼을 누르면 완료!</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 꿀팁</div>
+          <p>인스타 릴스에 올린 영상을 유튜브 쇼츠에도 그대로 올리세요! 같은 영상인데 유튜브에서 새로운 사람들에게 보여져요. 한 번의 촬영, 두 번의 노출!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- YT to Insta -->
+    <div class="guide-block fade-in">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji">🔗</span>
+        <span class="guide-block-title">유튜브 → 인스타 연결하기</span>
+        <span class="guide-block-toggle">▼</span>
+      </div>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>유튜브에 영상 먼저 올리기</strong>
+              <p>위의 동영상 업로드 또는 쇼츠 만들기를 먼저 해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>같은 영상 파일로 인스타 릴스 올리기</strong>
+              <p>갤러리에 있는 같은 영상을 인스타그램 릴스로도 올려요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <strong>두 곳에서 동시 노출!</strong>
+              <p>유튜브 구독자 + 인스타그램 팔로워 모두에게 영상이 보여져요.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 꿀팁</div>
+          <p>유튜브 영상 링크를 인스타 프로필 소개란(Bio)에 넣어두면, 학부모가 인스타에서 유튜브로 바로 이동할 수 있어요.</p>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ════════ 4. Scenarios ════════ -->
-  <div class="section reveal" id="sec-scenarios">
-    <div class="section-head">
-      <span class="section-num">4</span>
-      <h2 class="section-title">시나리오별 체크리스트</h2>
+<!-- ═══════════ Kakao Section ═══════════ -->
+<section class="section-full channel-section kakao" id="kakao">
+  <div class="section-inner">
+    <div class="channel-header fade-in">
+      <span class="channel-icon">💬</span>
+      <h2>카카오톡 채널</h2>
+      <p class="channel-tagline">학부모에게 직접 알림을 보내고 1:1 상담까지 할 수 있는 채널</p>
     </div>
 
-    <div class="scenario-tabs" role="tablist" aria-label="시나리오 선택">
-      <button class="scenario-tab active" role="tab" aria-selected="true" aria-controls="panel-daily" data-panel="daily">🎶 일상 클립</button>
-      <button class="scenario-tab" role="tab" aria-selected="false" aria-controls="panel-event" data-panel="event">🎉 이벤트</button>
-      <button class="scenario-tab" role="tab" aria-selected="false" aria-controls="panel-recital" data-panel="recital">🎹 발표회</button>
-    </div>
+    <!-- Post -->
+    <div class="guide-block fade-in" id="kakao-post">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji">📝</span>
+        <span class="guide-block-title">포스트 작성하기</span>
+        <span class="guide-block-toggle">▼</span>
+      </div>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>카카오톡 채널 관리자센터 접속</strong>
+              <p>검색창에 "카카오톡 채널 관리자센터"를 검색하거나, 카카오 비즈니스 앱을 열어요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>좌측 "포스트" 메뉴 클릭</strong>
+              <p>왼쪽 메뉴에서 <strong>포스트</strong>를 찾아 클릭해요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>새 포스트 작성</strong>
+              <p><strong>"새 포스트 작성"</strong> 버튼을 눌러요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>사진/영상 + 글 작성</strong>
+              <p>사진이나 영상을 넣고, 학원 소식이나 일정을 적어요.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <strong>발행하기</strong>
+              <p>"발행" 버튼을 누르면 채널 친구들이 볼 수 있어요!</p>
+            </div>
+          </li>
+        </ol>
 
-    <!-- Daily -->
-    <div class="scenario-panel active" id="panel-daily" role="tabpanel">
-      <div class="scenario-card">
-        <div class="scenario-meta">수업 풍경, 연습 영상 등 일상적인 짧은 콘텐츠</div>
-        <ul class="checklist" data-scenario="daily">
-          <li class="check-item" data-step="daily-1">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">1</span>
-              <span class="check-text">핸드폰 <strong>세로로 촬영</strong> (15~30초 하이라이트)</span>
-            </span>
-          </li>
-          <li class="check-item" data-step="daily-2">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">2</span>
-              <span class="check-text">CapCut에서 편집 (자르기 + 자막 추가)</span>
-            </span>
-          </li>
-          <li class="check-item" data-step="daily-3">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">3</span>
-              <span class="check-text"><span class="tag insta">인스타</span> 릴스 업로드 + <span class="tag yt">유튜브</span> 쇼츠 업로드</span>
-            </span>
-          </li>
-          <li class="check-item" data-step="daily-4">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">4</span>
-              <span class="check-text"><span class="tag kakao">카카오</span> "오늘의 수업 영상 올렸어요!" 알림 발송</span>
-            </span>
-          </li>
-        </ul>
+        <div class="tip-box">
+          <div class="tip-box-title">💡 꿀팁</div>
+          <p>포스트는 채널 홈에 계속 남아있어요. 학원 안내사항이나 행사 일정을 올리면 학부모가 언제든 확인할 수 있어요.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Event -->
-    <div class="scenario-panel" id="panel-event" role="tabpanel">
-      <div class="scenario-card">
-        <div class="scenario-meta">신학기 모집, 방학 특강, 할인 이벤트 등</div>
-        <ul class="checklist" data-scenario="event">
-          <li class="check-item" data-step="event-1">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">1</span>
-              <span class="check-text">Canva에서 <strong>이벤트 포스터</strong> 제작</span>
-            </span>
+    <!-- Alert Message -->
+    <div class="guide-block fade-in" id="kakao-alert">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji">🔔</span>
+        <span class="guide-block-title">알림 메시지 보내기</span>
+        <span class="guide-block-toggle">▼</span>
+      </div>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>관리자센터 접속</strong>
+              <p>카카오톡 채널 관리자센터에 로그인해요.</p>
+            </div>
           </li>
-          <li class="check-item" data-step="event-2">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">2</span>
-              <span class="check-text"><span class="tag insta">인스타</span> 피드 게시 (해시태그 세트 복사 붙여넣기)</span>
-            </span>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>"메시지" 메뉴 클릭</strong>
+              <p>왼쪽 메뉴에서 <strong>메시지</strong>를 선택해요.</p>
+            </div>
           </li>
-          <li class="check-item" data-step="event-3">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">3</span>
-              <span class="check-text"><span class="tag kakao">카카오</span> 소식 발송 (이미지 + 간략 안내)</span>
-            </span>
+          <li class="step-item">
+            <div class="step-number">3<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>"메시지 보내기" 클릭</strong>
+              <p><strong>메시지 보내기</strong> 버튼을 눌러요.</p>
+            </div>
           </li>
-          <li class="check-item" data-step="event-4">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">4</span>
-              <span class="check-text"><span class="tag home">홈페이지</span> 배너 교체 / 공지 업데이트</span>
-            </span>
+          <li class="step-item">
+            <div class="step-number">4<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>대상 선택하기</strong>
+              <p><strong>전체</strong>를 선택하면 모든 채널 친구에게, <strong>그룹</strong>을 선택하면 특정 그룹에게만 보내요.</p>
+            </div>
           </li>
-          <li class="check-item" data-step="event-5">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">5</span>
-              <span class="check-text">이벤트 종료 후 결과 사진 <span class="tag insta">인스타</span>에 업로드</span>
-            </span>
+          <li class="step-item">
+            <div class="step-number">5<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>메시지 작성하기</strong>
+              <p>텍스트 + 이미지로 메시지를 구성해요. 짧고 핵심적으로!</p>
+            </div>
           </li>
-        </ul>
+          <li class="step-item">
+            <div class="step-number">6</div>
+            <div class="step-content">
+              <strong>발송하기</strong>
+              <p>"발송" 버튼을 누르면 학부모 카카오톡에 바로 도착해요!</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 꿀팁</div>
+          <p>알림 메시지는 카카오톡에 직접 뜨기 때문에 확인율이 아주 높아요! 단, 너무 자주 보내면 차단될 수 있으니 주 1~2회가 적당해요.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Recital -->
-    <div class="scenario-panel" id="panel-recital" role="tabpanel">
-      <div class="scenario-card">
-        <div class="scenario-meta">정기 발표회, 연주회 등 대형 행사</div>
-        <ul class="checklist" data-scenario="recital">
-          <li class="check-item" data-step="recital-1">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">1</span>
-              <span class="check-text">발표회 <strong>전체 영상 촬영</strong> (가로) + 하이라이트 촬영 (세로)</span>
-            </span>
+    <!-- 1:1 Chat -->
+    <div class="guide-block fade-in" id="kakao-chat">
+      <div class="guide-block-header" onclick="toggleBlock(this)">
+        <span class="guide-block-emoji">💬</span>
+        <span class="guide-block-title">1:1 채팅 활용하기</span>
+        <span class="guide-block-toggle">▼</span>
+      </div>
+      <div class="guide-block-body">
+        <ol class="steps">
+          <li class="step-item">
+            <div class="step-number">1<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>채팅 기능 켜기</strong>
+              <p>관리자센터에서 1:1 채팅이 활성화되어 있는지 확인해요.</p>
+            </div>
           </li>
-          <li class="check-item" data-step="recital-2">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">2</span>
-              <span class="check-text">편집: 풀영상 + 학생별 개인 클립 + 하이라이트 릴스/쇼츠</span>
-            </span>
+          <li class="step-item">
+            <div class="step-number">2<div class="step-connector"></div></div>
+            <div class="step-content">
+              <strong>학부모 문의 응대하기</strong>
+              <p>학부모가 카카오톡으로 문의하면 1:1 채팅으로 바로 대화할 수 있어요.</p>
+            </div>
           </li>
-          <li class="check-item" data-step="recital-3">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">3</span>
-              <span class="check-text"><span class="tag yt">유튜브</span> 풀영상 업로드 (재생목록 "발표회"에 추가)</span>
-            </span>
+          <li class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <strong>수업 일정, 비용 안내</strong>
+              <p>수업 일정, 수강료, 학원 위치 등을 1:1로 편하게 안내해요.</p>
+            </div>
           </li>
-          <li class="check-item" data-step="recital-4">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">4</span>
-              <span class="check-text"><span class="tag insta">인스타</span> 릴스 하이라이트 + <span class="tag yt">쇼츠</span> 업로드</span>
-            </span>
-          </li>
-          <li class="check-item" data-step="recital-5">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">5</span>
-              <span class="check-text"><span class="tag kakao">카카오</span> "영상 올렸어요!" 알림 + 유튜브 링크 공유</span>
-            </span>
-          </li>
-          <li class="check-item" data-step="recital-6">
-            <span class="check-box" aria-hidden="true"></span>
-            <span class="check-content">
-              <span class="check-step">6</span>
-              <span class="check-text"><span class="tag home">홈페이지</span> 갤러리에 베스트 영상 추가</span>
-            </span>
-          </li>
-        </ul>
+        </ol>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 꿀팁</div>
+          <p>자주 묻는 질문(수업 시간, 수강료, 위치)에 대한 답변을 미리 만들어 놓으면 빠르게 응대할 수 있어요. 관리자센터에서 "자동응답" 설정도 가능해요!</p>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ════════ 5. How-to ════════ -->
-  <div class="section reveal" id="sec-howto">
-    <div class="section-head">
-      <span class="section-num">5</span>
-      <h2 class="section-title">실전 방법 (탭해서 펼치기)</h2>
+<!-- ═══════════ Scenario Section ═══════════ -->
+<section class="section-full channel-section scenario" id="scenario">
+  <div class="section-inner">
+    <div class="channel-header fade-in">
+      <span class="channel-icon">🎯</span>
+      <h2>실전 활용 시나리오</h2>
+      <p class="channel-tagline">상황별로 어떻게 SNS를 활용하면 되는지 알려드려요</p>
     </div>
 
-    <div class="howto-list">
-
-      <!-- Reels -->
-      <div class="howto-item insta">
-        <button class="howto-trigger" aria-expanded="false" aria-controls="howto-reels">
-          <span class="ht-icon">📸</span>
-          <span class="ht-label">인스타 릴스 올리기</span>
-          <span class="ht-arrow" aria-hidden="true">&#9660;</span>
-          <span class="ht-color"></span>
-        </button>
-        <div class="howto-body" id="howto-reels" style="max-height:0">
-          <div class="howto-body-inner">
-            <ol class="howto-steps">
-              <li><span>인스타 앱 열고 하단 <strong>[+]</strong> 버튼 누르기 > <strong>"릴스"</strong> 선택</span></li>
-              <li><span>갤러리에서 영상 선택 (15~90초) > 음악/텍스트 추가</span></li>
-              <li><span>캡션 + 해시태그 붙여넣기 > <strong>"공유"</strong> 누르면 끝!</span></li>
-            </ol>
-          </div>
+    <!-- Scenario 1: Daily -->
+    <div class="scenario-card fade-in">
+      <div class="scenario-card-header">
+        <span class="scenario-card-emoji">🎵</span>
+        <div>
+          <div class="scenario-card-title">일상 수업 클립 공유</div>
+          <p style="color: var(--n-500); font-size: 0.95rem; margin-top: 4px;">아이들의 귀여운 연주 모습을 공유해보세요</p>
         </div>
       </div>
-
-      <!-- YouTube -->
-      <div class="howto-item yt">
-        <button class="howto-trigger" aria-expanded="false" aria-controls="howto-yt">
-          <span class="ht-icon">🎬</span>
-          <span class="ht-label">유튜브 영상 올리기</span>
-          <span class="ht-arrow" aria-hidden="true">&#9660;</span>
-          <span class="ht-color"></span>
-        </button>
-        <div class="howto-body" id="howto-yt" style="max-height:0">
-          <div class="howto-body-inner">
-            <ol class="howto-steps">
-              <li><span>YouTube 앱 열고 하단 <strong>[+]</strong> 버튼 > <strong>"동영상 업로드"</strong></span></li>
-              <li><span>제목 + 설명 입력 (템플릿 복사) > 썸네일 선택</span></li>
-              <li><span>공개 설정 > <strong>"업로드"</strong> 누르면 끝! (Wi-Fi 권장)</span></li>
-            </ol>
-          </div>
-        </div>
+      <div class="scenario-flow">
+        <span class="scenario-flow-step">📱 촬영</span>
+        <span class="scenario-flow-arrow">→</span>
+        <span class="scenario-flow-step">📸 인스타 릴스/스토리</span>
+        <span class="scenario-flow-arrow">→</span>
+        <span class="scenario-flow-step">💬 카카오 포스트</span>
+        <span class="scenario-flow-arrow">→</span>
+        <span class="scenario-flow-step">🔔 학부모 알림</span>
       </div>
-
-      <!-- Shorts -->
-      <div class="howto-item yt">
-        <button class="howto-trigger" aria-expanded="false" aria-controls="howto-shorts">
-          <span class="ht-icon">📱</span>
-          <span class="ht-label">유튜브 쇼츠 만들기</span>
-          <span class="ht-arrow" aria-hidden="true">&#9660;</span>
-          <span class="ht-color"></span>
-        </button>
-        <div class="howto-body" id="howto-shorts" style="max-height:0">
-          <div class="howto-body-inner">
-            <ol class="howto-steps">
-              <li><span>YouTube 앱 열고 <strong>[+]</strong> 버튼 > <strong>"쇼츠 만들기"</strong></span></li>
-              <li><span>갤러리에서 세로 영상 선택 (60초 이내) > 텍스트/음악 추가</span></li>
-              <li><span>제목 + #Shorts 해시태그 > <strong>"쇼츠 업로드"</strong>로 완료!</span></li>
-            </ol>
-          </div>
-        </div>
+      <div class="tip-box" style="margin-top: 16px;">
+        <div class="tip-box-title">💡 이렇게 해보세요</div>
+        <p>짧은 15초짜리 클립이면 충분해요. 아이가 한 곡 완성했을 때, 열심히 연습하는 모습, 장난치며 웃는 순간 등 자연스러운 장면이 가장 반응이 좋아요.</p>
       </div>
-
-      <!-- Kakao -->
-      <div class="howto-item kakao">
-        <button class="howto-trigger" aria-expanded="false" aria-controls="howto-kakao">
-          <span class="ht-icon">💬</span>
-          <span class="ht-label">카카오채널 알림 보내기</span>
-          <span class="ht-arrow" aria-hidden="true">&#9660;</span>
-          <span class="ht-color"></span>
-        </button>
-        <div class="howto-body" id="howto-kakao" style="max-height:0">
-          <div class="howto-body-inner">
-            <ol class="howto-steps">
-              <li><span>카카오톡 채널 관리자 앱 > <strong>"소식"</strong> > <strong>"새 소식"</strong></span></li>
-              <li><span>이미지 + 제목 + 내용 작성</span></li>
-              <li><span>발송 대상 선택 > <strong>"발송"</strong> 누르면 끝!</span></li>
-            </ol>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <div class="tip-box">
-      <strong>한 번에 두 곳!</strong> 세로로 촬영 > CapCut 편집 > 저장 > 유튜브 쇼츠 + 인스타 릴스에 같은 영상을 올리면 시간이 절반으로 줄어요.
+    <!-- Scenario 2: Concert -->
+    <div class="scenario-card fade-in">
+      <div class="scenario-card-header">
+        <span class="scenario-card-emoji">🎹</span>
+        <div>
+          <div class="scenario-card-title">연주회 / 발표회</div>
+          <p style="color: var(--n-500); font-size: 0.95rem; margin-top: 4px;">특별한 행사를 최대한 활용하는 방법</p>
+        </div>
+      </div>
+      <div class="scenario-flow">
+        <span class="scenario-flow-step">🎥 영상 촬영</span>
+        <span class="scenario-flow-arrow">→</span>
+        <span class="scenario-flow-step">▶️ 유튜브 업로드</span>
+        <span class="scenario-flow-arrow">→</span>
+        <span class="scenario-flow-step">📸 인스타 릴스</span>
+        <span class="scenario-flow-arrow">→</span>
+        <span class="scenario-flow-step">🔔 카카오 알림</span>
+      </div>
+      <div class="tip-box" style="margin-top: 16px;">
+        <div class="tip-box-title">💡 이렇게 해보세요</div>
+        <p>연주회 전체 영상은 유튜브에 올리고, 하이라이트 30초는 인스타 릴스 + 유튜브 쇼츠에 올려요. 카카오로 "우리 아이 연주 영상이 올라왔어요!"라고 알림을 보내면 학부모가 너무 좋아해요!</p>
+      </div>
+    </div>
+
+    <!-- Scenario 3: Promotion -->
+    <div class="scenario-card fade-in">
+      <div class="scenario-card-header">
+        <span class="scenario-card-emoji">📢</span>
+        <div>
+          <div class="scenario-card-title">신학기 / 방학 홍보</div>
+          <p style="color: var(--n-500); font-size: 0.95rem; margin-top: 4px;">새 학생을 모집할 때 이렇게!</p>
+        </div>
+      </div>
+      <div class="scenario-flow">
+        <span class="scenario-flow-step">🎨 포스터 제작</span>
+        <span class="scenario-flow-arrow">→</span>
+        <span class="scenario-flow-step">📸 인스타 피드</span>
+        <span class="scenario-flow-arrow">→</span>
+        <span class="scenario-flow-step">🔔 카카오 알림</span>
+        <span class="scenario-flow-arrow">→</span>
+        <span class="scenario-flow-step">🌐 홈페이지 배너</span>
+      </div>
+      <div class="tip-box" style="margin-top: 16px;">
+        <div class="tip-box-title">💡 이렇게 해보세요</div>
+        <p>무료 디자인 도구(미리캔버스, 캔바)로 예쁜 포스터를 만들어보세요. 인스타에 올리면서 "수업 문의는 프로필 링크 클릭!" 이라고 적으면 자연스럽게 홈페이지나 카카오 채팅으로 연결돼요.</p>
+      </div>
     </div>
   </div>
+</section>
 
-</div>
-
-<!-- ════════ Footer ════════ -->
+<!-- ═══════════ Footer ═══════════ -->
 <footer class="footer">
-  <div class="footer-line">리틀버드음악학원 SNS 운영 가이드</div>
-  <div>체크리스트는 기기에 자동 저장됩니다</div>
+  <strong>🎵 리틀버드음악학원</strong>
+  <p>이 가이드를 따라하면 누구든 SNS 운영을 시작할 수 있어요!<br>모르는 부분이 있으면 언제든 물어보세요.</p>
 </footer>
 
+<!-- ═══════════ Back to Top ═══════════ -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 <script>
+// ── Accordion Toggle ──
+function toggleBlock(header) {
+  var block = header.parentElement;
+  block.classList.toggle('open');
+}
+
+// ── Scroll Observer for fade-in ──
 (function() {
-  'use strict';
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  // ── Sticky nav scroll shadow ──
-  var nav = document.getElementById('channelNav');
-  var lastScroll = 0;
-  function onScroll() {
-    var y = window.scrollY || window.pageYOffset;
-    if (y > 10) {
-      nav.classList.add('scrolled');
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+
+// ── Back to Top Button ──
+(function() {
+  var btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      btn.classList.add('visible');
     } else {
-      nav.classList.remove('scrolled');
+      btn.classList.remove('visible');
     }
-    lastScroll = y;
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  // ── Nav smooth scroll ──
-  var navItems = document.querySelectorAll('.nav-item');
-  navItems.forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        var offset = nav.offsetHeight + 12;
-        var top = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-      }
-      // Active state
-      navItems.forEach(function(n) { n.classList.remove('active'); });
-      this.classList.add('active');
-    });
   });
+})();
 
-  // ── Intersection Observer for nav highlighting ──
-  var sections = document.querySelectorAll('.section[id]');
-  if ('IntersectionObserver' in window) {
-    var navObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var id = entry.target.id;
-          var channelMap = {
-            'sec-channels': null, // multiple, skip
-            'sec-flowmap': 'map',
-            'sec-flow': 'map',
-            'sec-scenarios': null,
-            'sec-howto': null
-          };
-          var ch = channelMap[id];
-          if (ch) {
-            navItems.forEach(function(n) { n.classList.remove('active'); });
-            var item = document.querySelector('.nav-item[data-channel="' + ch + '"]');
-            if (item) item.classList.add('active');
-          }
-        }
-      });
-    }, { rootMargin: '-80px 0px -60% 0px' });
-    sections.forEach(function(s) { navObserver.observe(s); });
-  }
-
-  // ── Scenario Tabs ──
-  var tabs = document.querySelectorAll('.scenario-tab');
-  var panels = document.querySelectorAll('.scenario-panel');
-  tabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      var panelId = this.getAttribute('data-panel');
-      tabs.forEach(function(t) {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      this.classList.add('active');
-      this.setAttribute('aria-selected', 'true');
-      panels.forEach(function(p) {
-        p.classList.remove('active');
-      });
-      var target = document.getElementById('panel-' + panelId);
-      if (target) target.classList.add('active');
-    });
-  });
-
-  // ── Checklist with localStorage ──
-  var STORAGE_KEY = 'littlebird-sns-checks';
-  var saved = {};
-  try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) saved = JSON.parse(raw);
-  } catch(e) {}
-
-  var checkItems = document.querySelectorAll('.check-item');
-  checkItems.forEach(function(item) {
-    var step = item.getAttribute('data-step');
-    if (saved[step]) {
-      item.classList.add('done');
-      var box = item.querySelector('.check-box');
-      if (box) box.textContent = '\u2713';
+// ── Sticky Nav Active State ──
+(function() {
+  var sections = document.querySelectorAll('[id]');
+  var navLinks = document.querySelectorAll('.sticky-nav a');
+  var navMap = {};
+  navLinks.forEach(function(link) {
+    var href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      navMap[href.substring(1)] = link;
     }
-    item.addEventListener('click', function() {
-      var s = this.getAttribute('data-step');
-      var box = this.querySelector('.check-box');
-      if (this.classList.contains('done')) {
-        this.classList.remove('done');
-        if (box) box.textContent = '';
-        delete saved[s];
-      } else {
-        this.classList.add('done');
-        if (box) box.textContent = '\u2713';
-        saved[s] = true;
-      }
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); } catch(e) {}
-    });
   });
 
-  // ── Howto Accordions (collapsed by default) ──
-  var howtoItems = document.querySelectorAll('.howto-item');
-  howtoItems.forEach(function(item) {
-    var trigger = item.querySelector('.howto-trigger');
-    var body = item.querySelector('.howto-body');
-    trigger.addEventListener('click', function() {
-      var isOpen = item.classList.contains('open');
-      // Close all
-      howtoItems.forEach(function(other) {
-        other.classList.remove('open');
-        var ob = other.querySelector('.howto-body');
-        var ot = other.querySelector('.howto-trigger');
-        if (ob) ob.style.maxHeight = '0';
-        if (ot) ot.setAttribute('aria-expanded', 'false');
-      });
-      if (!isOpen) {
-        item.classList.add('open');
-        body.style.maxHeight = body.scrollHeight + 'px';
-        trigger.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-
-  // ── Scroll Reveal ──
-  if ('IntersectionObserver' in window) {
-    var reveals = document.querySelectorAll('.reveal');
-    var revealObs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var link = navMap[entry.target.id];
+      if (link) {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObs.unobserve(entry.target);
+          navLinks.forEach(function(l) { l.classList.remove('active'); });
+          link.classList.add('active');
         }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(function(r) { revealObs.observe(r); });
-  } else {
-    // Fallback: show all
-    document.querySelectorAll('.reveal').forEach(function(r) {
-      r.classList.add('visible');
+      }
     });
-  }
+  }, { threshold: 0.2, rootMargin: '-60px 0px -60% 0px' });
 
+  Object.keys(navMap).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
 })();
 </script>
 
