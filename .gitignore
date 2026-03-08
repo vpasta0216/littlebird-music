@@ -4,6 +4,8 @@ Thumbs.db
 .claude/
 .obsidian/
 .omc/
-logo/
+# logo/ 폴더는 images/logo/에 필요하므로 제거
+# /logo/ 루트의 원본 폴더만 무시
+/학원로고/
 
 .vercel
