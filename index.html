@@ -37,7 +37,7 @@
             --color-bg-section: #F5F0E8;
 
             --color-text: #333333;
-            --color-text-light: #777777;
+            --color-text-light: #555555;
             --color-white: #FFFFFF;
             --color-border: #E8E0D4;
 
@@ -57,7 +57,7 @@
             color: var(--color-text);
             background: var(--color-bg);
             line-height: 1.8;
-            font-weight: 300;
+            font-weight: 400;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -915,6 +915,12 @@
             color: rgba(255, 255, 255, 0.5);
         }
 
+        .footer > .container:first-child {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
         .footer-brand .logo-text {
             color: var(--color-white);
         }
@@ -1064,8 +1070,12 @@
                 text-align: center;
             }
 
+            body {
+                font-size: 1rem;
+            }
+
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
                 word-break: keep-all;
             }
 
@@ -1081,11 +1091,19 @@
 
             .about-content .section-desc {
                 word-break: keep-all;
-                line-height: 2;
+                line-height: 1.8;
             }
 
             .curriculum-card p {
                 word-break: keep-all;
+            }
+
+            .curriculum-card {
+                min-width: 280px !important;
+            }
+
+            .tags span {
+                font-size: 0.8rem !important;
             }
 
             .hero-buttons {
@@ -1505,7 +1523,7 @@
                     <span style="background: #03C75A; color: white; font-weight: 800; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">N</span>
                     <span style="font-weight: 700; color: #333; font-size: 1.1rem;">리틀버드 음악학원</span>
                 </div>
-                <span style="font-size: 0.85rem; color: #777; margin-top: 4px;">네이버 지도에서 보기 &rarr;</span>
+                <span style="font-size: 0.85rem; color: #555; margin-top: 4px;">네이버 지도에서 보기 &rarr;</span>
             </a>
             <div class="location-info fade-in">
                 <div class="section-label">Location</div>
@@ -1557,12 +1575,56 @@
             <div class="section-label">Contact</div>
             <h2 class="section-title">수강 상담 문의</h2>
             <p class="section-desc">아이 연령과 피아노 경험을 알려주시면<br>더 자세한 상담이 가능합니다. </p>
-            <form class="contact-form" onsubmit="event.preventDefault(); alert('문의가 접수되었습니다! (기능 연결 필요)');">
-                <input type="text" placeholder="학생 이름" required><input type="text" placeholder="학부모 연락처" required><input
-                    type="text" placeholder="학생 나이 / 경험 여부"><textarea placeholder="궁금하신 점을 남겨주세요"></textarea><button
-                    type="submit" class="btn-primary">문의하기 &rarr;
-                </button>
+            <form class="contact-form" id="contact-form" onsubmit="handleContactSubmit(event)">
+                <input type="hidden" name="access_key" value="c12f7b8b-2a6f-41c1-aa6f-244a029bf195">
+                <input type="hidden" name="subject" value="리틀버드 음악학원 수강문의">
+                <input type="text" name="name" placeholder="학생 이름" required>
+                <input type="text" name="phone" placeholder="학부모 연락처" required>
+                <input type="text" name="info" placeholder="학생 나이 / 경험 여부">
+                <textarea name="message" placeholder="궁금하신 점을 남겨주세요"></textarea>
+                <button type="submit" class="btn-primary" id="contact-btn">문의하기 &rarr;</button>
             </form>
+            <div id="contact-success" style="display:none; text-align:center; padding: 32px 0;">
+                <div style="font-size: 2.5rem; margin-bottom: 16px;">&#10004;</div>
+                <h3 style="color: var(--color-white); font-size: 1.3rem; margin-bottom: 8px;">문의가 접수되었습니다!</h3>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 24px; line-height: 1.6;">
+                    입력하신 내용이 학원으로 전달되었습니다.<br>
+                    빠른 상담을 원하시면 카카오톡을 이용해 주세요.
+                </p>
+                <a href="http://pf.kakao.com/_zICIX/chat" target="_blank"
+                   style="display:inline-block; padding: 14px 32px; background: #FEE500; color: #191919;
+                          border-radius: 12px; font-weight: 700; font-size: 1rem; text-decoration: none;">
+                    카카오톡으로 상담하기
+                </a>
+            </div>
+            <script>
+            function handleContactSubmit(e) {
+                e.preventDefault();
+                var form = document.getElementById('contact-form');
+                var btn = document.getElementById('contact-btn');
+                btn.textContent = '전송 중...';
+                btn.disabled = true;
+                var data = new FormData(form);
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: data
+                }).then(function(res) { return res.json(); })
+                .then(function(result) {
+                    if (result.success) {
+                        form.style.display = 'none';
+                        document.getElementById('contact-success').style.display = 'block';
+                    } else {
+                        alert('전송에 실패했습니다. 카카오톡으로 직접 문의해 주세요.');
+                        btn.textContent = '문의하기 \u2192';
+                        btn.disabled = false;
+                    }
+                }).catch(function() {
+                    alert('전송에 실패했습니다. 카카오톡으로 직접 문의해 주세요.');
+                    btn.textContent = '문의하기 \u2192';
+                    btn.disabled = false;
+                });
+            }
+            </script>
         </div>
     </section>
     <!--=====Footer=====-->

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNS 통합 가이드 - 채널 연결 흐름도</title>
+<style>
+  :root {
+    --color-homepage: #3B82F6;
+    --color-homepage-bg: #EFF6FF;
+    --color-homepage-border: #BFDBFE;
+    --color-insta: #C026D3;
+    --color-insta-bg: #FDF4FF;
+    --color-insta-border: #F0ABFC;
+    --color-youtube: #DC2626;
+    --color-youtube-bg: #FEF2F2;
+    --color-youtube-border: #FECACA;
+    --color-kakao: #F59E0B;
+    --color-kakao-bg: #FFFBEB;
+    --color-kakao-border: #FDE68A;
+    --color-gray-50: #F9FAFB;
+    --color-gray-100: #F3F4F6;
+    --color-gray-200: #E5E7EB;
+    --color-gray-300: #D1D5DB;
+    --color-gray-500: #6B7280;
+    --color-gray-600: #4B5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1F2937;
+    --color-gray-900: #111827;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: system-ui, -apple-system, 'Malgun Gothic', sans-serif;
+    background: #F0F4F8;
+    color: var(--color-gray-800);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 32px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    color: white;
+  }
+  .header h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .header p {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--color-gray-200);
+    letter-spacing: -0.01em;
+  }
+  .section-title .num {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: var(--color-gray-800);
+    color: white;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  /* Channel Cards */
+  .channel-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .channel-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+    border-left: 5px solid;
+    transition: transform 0.15s ease;
+  }
+  .channel-card:hover { transform: translateY(-2px); }
+  .channel-card.homepage { border-left-color: var(--color-homepage); }
+  .channel-card.insta { border-left-color: var(--color-insta); }
+  .channel-card.youtube { border-left-color: var(--color-youtube); }
+  .channel-card.kakao { border-left-color: var(--color-kakao); }
+  .channel-card .card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+  .channel-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .channel-card .card-role {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .channel-card.homepage .card-role { color: var(--color-homepage); }
+  .channel-card.insta .card-role { color: var(--color-insta); }
+  .channel-card.youtube .card-role { color: var(--color-youtube); }
+  .channel-card.kakao .card-role { color: var(--color-kakao); }
+  .channel-card p {
+    font-size: 0.88rem;
+    color: var(--color-gray-600);
+    line-height: 1.5;
+  }
+
+  /* Flow Diagram */
+  .flow-group {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  .flow-group h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .flow-label {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+  }
+  .flow-label.video { background: var(--color-youtube); }
+  .flow-label.photo { background: var(--color-insta); }
+  .flow-label.event { background: #059669; }
+
+  /* Flow rows */
+  .flow-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 12px;
+  }
+  .flow-row:last-child { margin-bottom: 0; }
+
+  .flow-node {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 2px solid;
+    background: white;
+    flex-shrink: 0;
+  }
+  .flow-node.source {
+    background: var(--color-gray-800);
+    color: white;
+    border-color: var(--color-gray-800);
+  }
+  .flow-node.homepage { color: var(--color-homepage); border-color: var(--color-homepage); background: var(--color-homepage-bg); }
+  .flow-node.insta { color: var(--color-insta); border-color: var(--color-insta); background: var(--color-insta-bg); }
+  .flow-node.youtube { color: var(--color-youtube); border-color: var(--color-youtube); background: var(--color-youtube-bg); }
+  .flow-node.kakao { color: var(--color-kakao); border-color: var(--color-kakao); background: var(--color-kakao-bg); }
+  .flow-node.optional {
+    border-style: dashed;
+    opacity: 0.75;
+  }
+  .flow-node.optional::after {
+    content: "(선택)";
+    font-size: 0.7rem;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+
+  .flow-arrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 6px;
+    color: var(--color-gray-400);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .flow-arrow::after { content: "\2192"; }
+
+  .flow-branch {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 0;
+  }
+  .flow-branch-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .flow-branch-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 4px;
+    position: relative;
+    width: 32px;
+    flex-shrink: 0;
+  }
+  .flow-branch-connector::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--color-gray-300);
+    transform: translateX(-50%);
+  }
+  .flow-branch-arm {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .flow-branch-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-gray-400);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-branch-line {
+    width: 16px;
+    height: 2px;
+    background: var(--color-gray-300);
+    flex-shrink: 0;
+  }
+
+  /* Simplified flow for mobile-friendly display */
+  .flow-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .flow-simple-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* Scenario Checklists */
+  .scenario-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  .scenario-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scenario-card .scenario-desc {
+    font-size: 0.85rem;
+    color: var(--color-gray-500);
+    margin-bottom: 12px;
+  }
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-gray-100);
+    font-size: 0.9rem;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-gray-300);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-gray-200);
+    color: var(--color-gray-600);
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .checklist .channel-tag {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+  .channel-tag.insta { background: var(--color-insta-bg); color: var(--color-insta); }
+  .channel-tag.youtube { background: var(--color-youtube-bg); color: var(--color-youtube); }
+  .channel-tag.kakao { background: var(--color-kakao-bg); color: var(--color-kakao); }
+  .channel-tag.homepage { background: var(--color-homepage-bg); color: var(--color-homepage); }
+
+  /* How-to Section */
+  .howto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .howto-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  .howto-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid;
+  }
+  .howto-card.insta h3 { border-color: var(--color-insta); color: var(--color-insta); }
+  .howto-card.youtube h3 { border-color: var(--color-youtube); color: var(--color-youtube); }
+  .howto-card.shorts h3 { border-color: var(--color-youtube); color: var(--color-youtube); }
+  .howto-card.kakao h3 { border-color: var(--color-kakao); color: var(--color-kakao); }
+
+  .howto-steps {
+    list-style: none;
+    padding: 0;
+    counter-reset: step;
+  }
+  .howto-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 0.88rem;
+    color: var(--color-gray-700);
+    line-height: 1.5;
+  }
+  .howto-steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .howto-card.insta .howto-steps li::before { background: var(--color-insta-bg); color: var(--color-insta); }
+  .howto-card.youtube .howto-steps li::before { background: var(--color-youtube-bg); color: var(--color-youtube); }
+  .howto-card.shorts .howto-steps li::before { background: var(--color-youtube-bg); color: var(--color-youtube); }
+  .howto-card.kakao .howto-steps li::before { background: var(--color-kakao-bg); color: var(--color-kakao); }
+
+  /* Tip callout */
+  .tip {
+    background: #ECFDF5;
+    border-left: 4px solid #059669;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: #065F46;
+    margin-top: 12px;
+  }
+  .tip strong { font-weight: 700; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--color-gray-500);
+    font-size: 0.8rem;
+    margin-top: 20px;
+  }
+
+  /* Badge */
+  .scenario-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+  }
+  .scenario-badge.daily { background: #6366F1; }
+  .scenario-badge.event { background: #059669; }
+  .scenario-badge.recital { background: #DC2626; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container { padding: 16px 12px; }
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.4rem; }
+    .channel-cards { grid-template-columns: 1fr; }
+    .howto-grid { grid-template-columns: 1fr; }
+    .flow-node { padding: 6px 10px; font-size: 0.8rem; }
+    .flow-arrow { padding: 0 4px; }
+    .section-title { font-size: 1.15rem; }
+  }
+
+  /* Print */
+  @media print {
+    body { background: white; }
+    .container { padding: 0; max-width: 100%; }
+    .header { background: var(--color-gray-800) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .channel-card, .flow-group, .scenario-card, .howto-card {
+      box-shadow: none;
+      border: 1px solid var(--color-gray-200);
+      break-inside: avoid;
+    }
+    .channel-card:hover { transform: none; }
+    .flow-node, .flow-label, .scenario-badge, .channel-tag, .step-num {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .section { break-inside: avoid; }
+    .section-title { break-after: avoid; }
+    .howto-grid { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>SNS 통합 가이드</h1>
+    <p>채널 연결 흐름도 - 한눈에 보는 콘텐츠 배포 지도</p>
+  </div>
+
+  <!-- B1: Channel Role Cards -->
+  <div class="section">
+    <h2 class="section-title"><span class="num">1</span> 채널 역할 정의</h2>
+    <div class="channel-cards">
+      <div class="channel-card homepage">
+        <div class="card-icon">🌐</div>
+        <h3>홈페이지</h3>
+        <div class="card-role">"학원의 얼굴"</div>
+        <p>커리큘럼, 강사 소개, 위치 안내. 검색(네이버/구글)으로 처음 찾아오는 사람이 가장 먼저 보는 곳.</p>
+      </div>
+      <div class="channel-card insta">
+        <div class="card-icon">📸</div>
+        <h3>인스타그램</h3>
+        <div class="card-role">"일상 공유 창구"</div>
+        <p>수업 사진/영상, 릴스, 이벤트 포스터. 비팔로워에게도 노출되어 새 학부모 유입에 효과적.</p>
+      </div>
+      <div class="channel-card youtube">
+        <div class="card-icon">🎬</div>
+        <h3>유튜브</h3>
+        <div class="card-role">"영상 저장소"</div>
+        <p>발표회 풀영상, 학생 연주, 쇼츠. 긴 영상 보관 + 짧은 쇼츠로 노출 확대.</p>
+      </div>
+      <div class="channel-card kakao">
+        <div class="card-icon">💬</div>
+        <h3>카카오채널</h3>
+        <div class="card-role">"학부모 알림"</div>
+        <p>공지 알림, 이벤트 안내, 1:1 상담. 자동응답으로 수업 중에도 문의 대응.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- B2: Content Flow Map -->
+  <div class="section">
+    <h2 class="section-title"><span class="num">2</span> 콘텐츠 흐름 매핑 지도</h2>
+
+    <!-- Flow 1: Video -->
+    <div class="flow-group">
+      <h3><span class="flow-label video">흐름 1</span> 영상 콘텐츠</h3>
+      <div class="flow-simple">
+        <div class="flow-simple-row">
+          <span class="flow-node source">영상 촬영</span>
+          <span class="flow-arrow"></span>
+          <span class="flow-node source">편집 (CapCut)</span>
+        </div>
+        <div style="padding-left: 16px; display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+          <div class="flow-simple-row">
+            <span style="color: var(--color-gray-400); padding: 0 8px;">├</span>
+            <span class="flow-arrow"></span>
+            <span class="flow-node youtube">유튜브 (긴 영상)</span>
+          </div>
+          <div class="flow-simple-row">
+            <span style="color: var(--color-gray-400); padding: 0 8px;">├</span>
+            <span class="flow-arrow"></span>
+            <span class="flow-node insta">인스타 릴스 (짧은 클립)</span>
+          </div>
+          <div class="flow-simple-row">
+            <span style="color: var(--color-gray-400); padding: 0 8px;">└</span>
+            <span class="flow-arrow"></span>
+            <span class="flow-node youtube">유튜브 쇼츠 (세로 짧은 영상)</span>
+          </div>
+        </div>
+      </div>
+      <div class="tip">
+        <strong>핵심:</strong> 세로로 촬영하면 릴스 + 쇼츠에 동시 활용 가능! 한 번 만들면 두 곳에 올려요.
+      </div>
+    </div>
+
+    <!-- Flow 2: Photo/Poster -->
+    <div class="flow-group">
+      <h3><span class="flow-label photo">흐름 2</span> 사진 / 포스터</h3>
+      <div class="flow-simple">
+        <div class="flow-simple-row">
+          <span class="flow-node source">사진/포스터 제작 (Canva)</span>
+        </div>
+        <div style="padding-left: 16px; display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+          <div class="flow-simple-row">
+            <span style="color: var(--color-gray-400); padding: 0 8px;">├</span>
+            <span class="flow-arrow"></span>
+            <span class="flow-node insta">인스타 피드 게시</span>
+          </div>
+          <div class="flow-simple-row">
+            <span style="color: var(--color-gray-400); padding: 0 8px;">├</span>
+            <span class="flow-arrow"></span>
+            <span class="flow-node kakao">카카오채널 알림 발송</span>
+          </div>
+          <div class="flow-simple-row">
+            <span style="color: var(--color-gray-400); padding: 0 8px;">└</span>
+            <span class="flow-arrow"></span>
+            <span class="flow-node homepage optional">홈페이지 업데이트</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flow 3: Event -->
+    <div class="flow-group">
+      <h3><span class="flow-label event">흐름 3</span> 이벤트 (신학기 / 방학 / 발표회)</h3>
+      <div class="flow-simple">
+        <div class="flow-simple-row">
+          <span class="flow-node source">이벤트 기획</span>
+        </div>
+        <div style="padding-left: 16px; display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+          <!-- Poster branch -->
+          <div style="margin-bottom: 8px;">
+            <div class="flow-simple-row" style="margin-bottom: 6px;">
+              <span style="color: var(--color-gray-400); padding: 0 8px;">├</span>
+              <span class="flow-arrow"></span>
+              <span class="flow-node source">포스터 제작</span>
+            </div>
+            <div style="padding-left: 48px; display: flex; flex-direction: column; gap: 6px;">
+              <div class="flow-simple-row">
+                <span style="color: var(--color-gray-400); padding: 0 8px;">├</span>
+                <span class="flow-arrow"></span>
+                <span class="flow-node insta">인스타 게시</span>
+              </div>
+              <div class="flow-simple-row">
+                <span style="color: var(--color-gray-400); padding: 0 8px;">├</span>
+                <span class="flow-arrow"></span>
+                <span class="flow-node kakao">카카오 알림</span>
+              </div>
+              <div class="flow-simple-row">
+                <span style="color: var(--color-gray-400); padding: 0 8px;">└</span>
+                <span class="flow-arrow"></span>
+                <span class="flow-node homepage">홈페이지 배너</span>
+              </div>
+            </div>
+          </div>
+          <!-- Video branch (recital) -->
+          <div>
+            <div class="flow-simple-row" style="margin-bottom: 6px;">
+              <span style="color: var(--color-gray-400); padding: 0 8px;">└</span>
+              <span class="flow-arrow"></span>
+              <span class="flow-node source">영상 촬영 (발표회)</span>
+            </div>
+            <div style="padding-left: 48px; display: flex; flex-direction: column; gap: 6px;">
+              <div class="flow-simple-row">
+                <span style="color: var(--color-gray-400); padding: 0 8px;">├</span>
+                <span class="flow-arrow"></span>
+                <span class="flow-node youtube">유튜브 풀영상</span>
+              </div>
+              <div class="flow-simple-row">
+                <span style="color: var(--color-gray-400); padding: 0 8px;">├</span>
+                <span class="flow-arrow"></span>
+                <span class="flow-node insta">인스타 릴스 (하이라이트)</span>
+              </div>
+              <div class="flow-simple-row">
+                <span style="color: var(--color-gray-400); padding: 0 8px;">└</span>
+                <span class="flow-arrow"></span>
+                <span class="flow-node youtube">유튜브 쇼츠</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B3: Scenario Checklists -->
+  <div class="section">
+    <h2 class="section-title"><span class="num">3</span> 시나리오별 체크리스트</h2>
+
+    <!-- Scenario 1: Daily Clip -->
+    <div class="scenario-card">
+      <h3><span class="scenario-badge daily">시나리오 1</span> 일상 클립</h3>
+      <div class="scenario-desc">수업 풍경, 연습 영상 등 일상적인 짧은 콘텐츠</div>
+      <ol class="checklist">
+        <li><span class="step-num">1</span> <span>핸드폰 <strong>세로로 촬영</strong> (15~30초 하이라이트)</span></li>
+        <li><span class="step-num">2</span> <span>CapCut에서 편집 (자르기 + 자막 추가)</span></li>
+        <li><span class="step-num">3</span> <span><span class="channel-tag insta">인스타</span> 릴스로 업로드 + <span class="channel-tag youtube">유튜브</span> 쇼츠로 업로드</span></li>
+        <li><span class="step-num">4</span> <span><span class="channel-tag kakao">카카오</span> "오늘의 수업 영상 올렸어요!" 알림 발송</span></li>
+      </ol>
+    </div>
+
+    <!-- Scenario 2: Event -->
+    <div class="scenario-card">
+      <h3><span class="scenario-badge event">시나리오 2</span> 이벤트</h3>
+      <div class="scenario-desc">신학기 모집, 방학 특강, 할인 이벤트 등</div>
+      <ol class="checklist">
+        <li><span class="step-num">1</span> <span>Canva에서 <strong>이벤트 포스터</strong> 제작</span></li>
+        <li><span class="step-num">2</span> <span><span class="channel-tag insta">인스타</span> 피드 게시 (해시태그 세트 복사 붙여넣기)</span></li>
+        <li><span class="step-num">3</span> <span><span class="channel-tag kakao">카카오</span> 소식 발송 (이미지 + 간략 안내)</span></li>
+        <li><span class="step-num">4</span> <span><span class="channel-tag homepage">홈페이지</span> 배너 교체 / 공지 업데이트</span></li>
+        <li><span class="step-num">5</span> <span>이벤트 종료 후 결과 사진 <span class="channel-tag insta">인스타</span>에 업로드</span></li>
+      </ol>
+    </div>
+
+    <!-- Scenario 3: Recital -->
+    <div class="scenario-card">
+      <h3><span class="scenario-badge recital">시나리오 3</span> 발표회</h3>
+      <div class="scenario-desc">정기 발표회, 연주회 등 대형 행사</div>
+      <ol class="checklist">
+        <li><span class="step-num">1</span> <span>발표회 <strong>전체 영상 촬영</strong> (가로) + 하이라이트 촬영 (세로)</span></li>
+        <li><span class="step-num">2</span> <span>편집: 풀영상 + 학생별 개인 클립 + 하이라이트 릴스/쇼츠</span></li>
+        <li><span class="step-num">3</span> <span><span class="channel-tag youtube">유튜브</span> 풀영상 업로드 (재생목록 "발표회"에 추가)</span></li>
+        <li><span class="step-num">4</span> <span><span class="channel-tag insta">인스타</span> 릴스 하이라이트 + <span class="channel-tag youtube">쇼츠</span> 업로드</span></li>
+        <li><span class="step-num">5</span> <span><span class="channel-tag kakao">카카오</span> 학부모에게 "영상 올렸어요!" 알림 + 유튜브 링크 공유</span></li>
+        <li><span class="step-num">6</span> <span><span class="channel-tag homepage">홈페이지</span> 갤러리에 베스트 영상 추가</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- B4: How-to Summary -->
+  <div class="section">
+    <h2 class="section-title"><span class="num">4</span> 실전 방법 요약 (3단계로 끝!)</h2>
+    <div class="howto-grid">
+
+      <!-- Reels -->
+      <div class="howto-card insta">
+        <h3>인스타 릴스 올리기</h3>
+        <ol class="howto-steps">
+          <li><span>인스타 앱 열고 하단 <strong>[+]</strong> 버튼 누르기 > <strong>"릴스"</strong> 선택</span></li>
+          <li><span>갤러리에서 영상 선택 (15~90초) > 음악/텍스트 추가</span></li>
+          <li><span>캡션 + 해시태그 붙여넣기 > <strong>"공유"</strong> 누르면 끝!</span></li>
+        </ol>
+      </div>
+
+      <!-- YouTube Upload -->
+      <div class="howto-card youtube">
+        <h3>유튜브 영상 올리기</h3>
+        <ol class="howto-steps">
+          <li><span>YouTube 앱 열고 하단 <strong>[+]</strong> 버튼 > <strong>"동영상 업로드"</strong></span></li>
+          <li><span>제목 + 설명 입력 (템플릿 복사) > 썸네일 선택</span></li>
+          <li><span>공개 설정 > <strong>"업로드"</strong> 누르면 끝! (Wi-Fi 권장)</span></li>
+        </ol>
+      </div>
+
+      <!-- Shorts -->
+      <div class="howto-card shorts">
+        <h3>유튜브 쇼츠 만들기</h3>
+        <ol class="howto-steps">
+          <li><span>YouTube 앱 열고 <strong>[+]</strong> 버튼 > <strong>"쇼츠 만들기"</strong></span></li>
+          <li><span>갤러리에서 세로 영상 선택 (60초 이내) > 텍스트/음악 추가</span></li>
+          <li><span>제목 + #Shorts 해시태그 > <strong>"쇼츠 업로드"</strong>로 완료!</span></li>
+        </ol>
+      </div>
+
+      <!-- Kakao -->
+      <div class="howto-card kakao">
+        <h3>카카오채널 알림 보내기</h3>
+        <ol class="howto-steps">
+          <li><span>카카오톡 채널 관리자 앱 > <strong>"소식"</strong> > <strong>"새 소식"</strong></span></li>
+          <li><span>이미지 + 제목 + 내용 작성</span></li>
+          <li><span>발송 대상 선택 > <strong>"발송"</strong> 누르면 끝!</span></li>
+        </ol>
+      </div>
+
+    </div>
+
+    <div class="tip" style="margin-top: 16px;">
+      <strong>한 번에 두 곳!</strong> 세로로 촬영 > CapCut 편집 > 저장 > 유튜브 쇼츠 + 인스타 릴스에 같은 영상을 올리면 시간이 절반으로 줄어요.
+    </div>
+  </div>
+
+  <div class="footer">
+    리틀버드음악학원 SNS 통합 가이드 | 인쇄하여 사용하세요
+  </div>
+
+</div>
+
+</body>
+</html>
